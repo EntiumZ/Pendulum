@@ -7,47 +7,47 @@ package t.vi.java;
  */
 
 public class Magnet {
-	private double positionX;
-	private double positionY;
-	private double km; //strength coefficient for single magnets
-	private double kg; //strength coefficient of pull back
+	private int positionX;
+	private int positionY;
+	private int km; //strength coefficient for single magnets
+	private int kg; //strength coefficient of pull back
 	
-	public Magnet(double x, double y, double km, double kg) {
+	public Magnet(int x, int y, int km, int kg) {
 		this.setPositionX(x);
 		this.setPositionY(y);
 		this.setKm(km);
 		this.setKg(kg);
 	}
 
-	public double getPositionX() {
+	public int getPositionX() {
 		return positionX;
 	}
 
-	public void setPositionX(double positionX) {
+	public void setPositionX(int positionX) {
 		this.positionX = positionX;
 	}
 
-	public double getPositionY() {
+	public int getPositionY() {
 		return positionY;
 	}
 
-	public void setPositionY(double positionY) {
+	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
 
-	public double getKm() {
+	public int getKm() {
 		return km;
 	}
 
-	public void setKm(double km) {
+	public void setKm(int km) {
 		this.km = km;
 	}
 
-	public double getKg() {
+	public int getKg() {
 		return kg;
 	}
 
-	public void setKg(double kg) {
+	public void setKg(int kg) {
 		this.kg = kg;
 	}
 	
