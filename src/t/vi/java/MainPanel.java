@@ -10,6 +10,32 @@ public class MainPanel extends JPanel implements MouseListener{
 	/**
 	 * 
 	 */
+	
+	private int leftadjust;
+	public int getLeftadjust() {
+		return leftadjust;
+	}
+
+
+
+	public void setLeftadjust(int leftadjust) {
+		this.leftadjust = leftadjust;
+	}
+
+
+
+	public int getTopadjust() {
+		return topadjust;
+	}
+
+
+
+	public void setTopadjust(int topadjust) {
+		this.topadjust = topadjust;
+	}
+
+
+	private int topadjust;
 	private static final long serialVersionUID = 1L;
 	public static final Image img = Toolbox.getImage("image/ball.png");
 	private Ball ball = null; 
@@ -18,11 +44,12 @@ public class MainPanel extends JPanel implements MouseListener{
 	}	
 	
 	
+	
 	public void paint(Graphics g) {		
 		super.paint(g);
 		g.setColor(Color.BLUE);
 		if(ball != null) {			
-			g.drawOval(ball.getPositionX(), ball.getPositionY(), 50, 50);
+			g.drawOval(ball.getPositionX()-25-leftadjust, ball.getPositionY()-25-topadjust, 50, 50);
 			System.out.println(ball.getPositionX() +"," + ball.getPositionY() );
 		}		
 	}
