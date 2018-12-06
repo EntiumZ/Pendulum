@@ -28,6 +28,8 @@ public class Toolbox {
 	public static int controlpanelWidth = 200;
 	public static int controlpanelHeight = 800;
 	
+	public static int ball_size = 20;
+	
 	
 	public static Image getImage(String path) {
 		URL u = Toolbox.class.getClassLoader().getResource(path);
