@@ -8,6 +8,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
 	
 	private MainPanel mainpanel = null;
 
@@ -25,11 +26,4 @@ public class MainFrame extends JFrame {
 		mainpanel.setLeftadjust(temp.left);
 		mainpanel.setTopadjust(temp.top);
 	}
-	
-//	private void init() {
-//		this.setSize(Toolbox.frameWidth, Toolbox.frameHeigth);
-//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		this.setVisible(true);
-//	}
-
 }

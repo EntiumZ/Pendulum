@@ -10,8 +10,11 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
 	
 	private int leftadjust;
+	private int topadjust;
+	
 	public int getLeftadjust() {
 		return leftadjust;
 	}
@@ -19,7 +22,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	public void setLeftadjust(int leftadjust) {
 		this.leftadjust = leftadjust;
 	}
-
+		
 	public int getTopadjust() {
 		return topadjust;
 	}
@@ -28,16 +31,11 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		this.topadjust = topadjust;
 	}
 
-
-	private int topadjust;
-	private static final long serialVersionUID = 1L;
 	public static final Image img = Toolbox.getImage("image/ball.png");
 	private Ball ball = null; 
 	
 	public MainPanel() {
 	}	
-	
-	
 	
 	public void paint(Graphics g) {		
 		super.paint(g);
@@ -45,63 +43,36 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		if(ball != null) {			
 			g.fillOval(ball.getPositionX()-leftadjust-Toolbox.ball_size/2, ball.getPositionY()-topadjust-Toolbox.ball_size/2, Toolbox.ball_size, Toolbox.ball_size);
 		}
-		
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		int x = arg0.getX();
-		int y = arg0.getY();		
-		if(ball == null) {
+		int y = arg0.getY();
+		System.out.println("x= " + x +" y= " + y +"\n");
+		if(ball == null || ball.isStay() == true) {
 			ball = Ball.getBall();
 			ball.setPositionX(x);
 			ball.setPositionY(y);
 			ball.setMass(Toolbox.ballMass);
 		}
-		if(ball != null) {
-			if(ball.getPositionX() < 400 && ball.getPositionX() < 400) {
+		if(ball != null && ball.isStay() == true) {
+			if(ball.getPositionX() < 400 && ball.getPositionY() < 400) {
+				this.repaint();
 				Thread t = new Thread(ball);
 				t.start();
-				this.repaint();				
 			}			
 		}
-
-		// TODO Auto-generated method stub
 	}
 
 
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		
-		
-	}
-
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void run() {
 		while(true) {
 			if(ball!=null) {
 				if(ball.getPositionX() >400 && ball.getPositionY() >400) {
-					break;
+					ball.setStay(true);
 				}				
 			}
 			
@@ -111,10 +82,24 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if(ball != null && ball.isStay() == false) {
+				this.repaint();
+			}
 			
-			this.repaint();
 		}		
 	}
-	 
+	
+	//implementation not need
+		@Override
+		public void mouseEntered(MouseEvent arg0) {}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {}	 
 
 }

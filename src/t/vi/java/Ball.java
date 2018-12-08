@@ -1,7 +1,5 @@
 package t.vi.java;
 
-import java.awt.Image;
-
 /**
  * 
  * @author Oak
@@ -9,11 +7,13 @@ import java.awt.Image;
  */
 
 public class Ball implements Runnable{
+
 	private int positionX = 0;
 	private int positionY = 0;
 	private int mass = Toolbox.ballMass;
+	private boolean stay = true;
 	
-	private static Ball ball = new Ball(0, 0, 0);
+	private static Ball ball = new Ball(0, 0, Toolbox.ballMass);
 	
 	private Ball(int m, int x, int y) {
 		this.setMass(m);
@@ -51,12 +51,12 @@ public class Ball implements Runnable{
 
 	@Override
 	public void run() {
+		ball.setStay(false);
 		while(true) {
 			
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -64,11 +64,20 @@ public class Ball implements Runnable{
 			this.positionY += 3;
 			
 			if(this.positionX > 400 && this.positionY >400) {
+				ball.setStay(true);
 				System.out.println(this.positionX + "+" +this.positionY);
 				break;
 			}
 		}
 						
+	}
+
+	public boolean isStay() {
+		return stay;
+	}
+
+	public void setStay(boolean b) {
+		this.stay = b;
 	}
 
 
