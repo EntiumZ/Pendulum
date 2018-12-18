@@ -21,7 +21,7 @@ public class Toolbox {
 	public static int timestep = 1;
 	public static int ballMass = 1;
 	
-	public static int frameWidth = 800;
+	public static int frameWidth = 1000;
 	public static int frameHeigth = 800;
 	public static int mainpanelWidth = 800;
 	public static int mainpanelHeight = 800;

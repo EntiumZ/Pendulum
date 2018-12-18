@@ -52,7 +52,7 @@ public class Ball implements Runnable{
 	@Override
 	public void run() {
 		ball.setStay(false);
-		while(true) {
+		while(!ball.isStay()) {
 			
 			try {
 				Thread.sleep(40);
@@ -62,10 +62,10 @@ public class Ball implements Runnable{
 			
 			this.positionX += 2;
 			this.positionY += 3;
-			
+			System.out.println(this.positionX + "+" +this.positionY);
 			if(this.positionX > 400 && this.positionY >400) {
 				ball.setStay(true);
-				System.out.println(this.positionX + "+" +this.positionY);
+				System.out.println("final:"+this.positionX + "+" +this.positionY);
 				break;
 			}
 		}

@@ -16,6 +16,12 @@ public class ControlPanel extends JPanel implements ActionListener{
 	JButton reset = new JButton("reset");
 	JButton valueSet = new JButton("OK");
 	private static final long serialVersionUID = 1L;
+	
+	private static Ball ball = null;
+	
+	public static void setBall(Ball b) {
+		ball = b;
+	}
 
 	public ControlPanel() {		
 		this.init();
@@ -24,10 +30,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 	
 	//basic properties of ControlPanel
 	private void init() {
-		Dimension size = getPreferredSize();
-		size.width = Toolbox.controlpanelWidth;
-		size.height = Toolbox.controlpanelHeight;
-		setPreferredSize(size);
+		this.setSize(Toolbox.controlpanelWidth, Toolbox.controlpanelHeight);
 	}
 	
 	//Panel contents
@@ -35,14 +38,14 @@ public class ControlPanel extends JPanel implements ActionListener{
 		
 		this.add(valueSet);
 		this.add(reset);
+		reset.addActionListener(this);
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-		
+		ball.setStay(true);
+		System.out.println(ball.getPositionX() + "%%" +ball.getPositionY());
 	}
 
 }

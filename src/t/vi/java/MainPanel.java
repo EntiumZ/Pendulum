@@ -34,6 +34,10 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	public static final Image img = Toolbox.getImage("image/ball.png");
 	private Ball ball = null; 
 	
+	public Ball getBall() {
+		return this.ball;
+	}
+	
 	public MainPanel() {
 	}	
 	
@@ -52,6 +56,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		System.out.println("x= " + x +" y= " + y +"\n");
 		if(ball == null || ball.isStay() == true) {
 			ball = Ball.getBall();
+			ControlPanel.setBall(ball);
 			ball.setPositionX(x);
 			ball.setPositionY(y);
 			ball.setMass(Toolbox.ballMass);
@@ -69,11 +74,12 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 
 	@Override
 	public void run() {
+		
 		while(true) {
-			if(ball!=null) {
+			if(ball!=null && ball.isStay() == false) {
 				if(ball.getPositionX() >400 && ball.getPositionY() >400) {
 					ball.setStay(true);
-				}				
+				}
 			}
 			
 			try {
@@ -82,6 +88,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			if(ball != null && ball.isStay() == false) {
 				this.repaint();
 			}
