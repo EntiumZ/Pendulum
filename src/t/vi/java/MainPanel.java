@@ -39,6 +39,8 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	}
 	
 	public MainPanel() {
+		//this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);
+		//this.setVisible(true);
 	}	
 	
 	public void paint(Graphics g) {		

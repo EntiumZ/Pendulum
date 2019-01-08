@@ -19,12 +19,13 @@ public class MainFrame extends JFrame {
 		controlpanel = new ControlPanel();
 		Thread t = new Thread(mainpanel);
 		t.start();
-		this.setLayout(new GridLayout(1,2));
+		this.setLayout(new BorderLayout());
 		this.add(mainpanel);
-		this.add(controlpanel);
+		this.add(controlpanel,BorderLayout.EAST);
 		this.addMouseListener(mainpanel);
 		this.setSize(Toolbox.frameWidth, Toolbox.frameHeigth);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
 		this.setVisible(true);
 		Insets temp = this.getInsets();
 		mainpanel.setLeftadjust(temp.left);
