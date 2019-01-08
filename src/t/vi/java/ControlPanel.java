@@ -66,14 +66,20 @@ public class ControlPanel extends JPanel implements ActionListener{
 		ps[1].add(km_input);
 		ps[1].add(valueSet);		
 		ps[1].add(reset);
-		this.setSize(Toolbox.controlpanelWidth, Toolbox.controlpanelHeight);		
+		this.setSize(Toolbox.controlpanelWidth, Toolbox.controlpanelHeight);
+		valueSet.addActionListener(this);
 		reset.addActionListener(this);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		ball.setStay(true);
-		System.out.println(ball.getPositionX() + "%%" +ball.getPositionY());
+	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource() == reset) {
+			ball.setStay(true);
+			System.out.println(ball.getPositionX() + "%%" +ball.getPositionY());			
+		}else if(ae.getSource() == valueSet) {
+			
+		}
+		
 	}
 
 }
