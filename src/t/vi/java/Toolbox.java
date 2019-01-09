@@ -28,6 +28,13 @@ public class Toolbox {
 	public static int controlpanelWidth = 200;
 	public static int controlpanelHeight = 800;
 	
+	//default parameters
+	public static double coeff[] = {1.0, 1.0, 1.0, 1.0};
+	public static double km_0 = 1.0;  
+	public static double kf_0 = 1.0;
+	public static double kg_0 = 1.0;
+	public static double mass_0 = 1.0;
+	
 	public static int ball_size = 20;
 	
 	

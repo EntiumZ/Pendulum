@@ -11,21 +11,14 @@ import javax.swing.JTextField;
 
 public class ControlPanel extends JPanel implements ActionListener{
 	
-	private int textlength = 4;
-	
 	private static final long serialVersionUID = 1L;
 	
-	private JLabel mass = new JLabel("Mass:");
-	private JTextField mass_input = new JTextField(textlength);
+	private int textlength = 5;
 	
-	private JLabel km = new JLabel("Strengh Coefficient:");
-	private JTextField km_input = new JTextField(textlength);
+	private String[] slabel = {"Mass:", "Strength Coefficient:", "Gravity Coefficient:", "Friction Ceofficient:"}; 
 	
-	private JLabel kg = new JLabel("Gravity Coefficient:");
-	private JTextField kg_input = new JTextField(textlength);
-	
-	private JLabel kf = new JLabel("Friction Coefficient:");
-	private JTextField kf_input = new JTextField(textlength);
+	private JLabel[] labels = new JLabel[4];
+	private JTextField[] fields = new JTextField[4];
 	
 	private JButton reset = new JButton("reset");
 	private JButton valueSet = new JButton("OK");
@@ -55,15 +48,19 @@ public class ControlPanel extends JPanel implements ActionListener{
 			this.add(ps[i]);
 		}
 		
-		ps[1].setLayout(new GridLayout(5,2,10,10));
-		ps[1].add(mass);
-		ps[1].add(mass_input);
-		ps[1].add(kf);
-		ps[1].add(kf_input);
-		ps[1].add(kg);
-		ps[1].add(kg_input);
-		ps[1].add(km);
-		ps[1].add(km_input);
+		for(int i = 0; i < 4; i++) {
+			labels[i] = new JLabel(slabel[i]);
+			fields[i] = new JTextField(textlength);
+		}
+		
+		ps[1].setLayout(new GridLayout(5,2,20,10));
+		
+		for(int i = 0; i < 4; i++) {
+			ps[1].add(labels[i]);
+			ps[1].add(fields[i]);
+			fields[i].setText(Double.toString(Toolbox.coeff[i]));
+		}
+				
 		ps[1].add(valueSet);		
 		ps[1].add(reset);
 		this.setSize(Toolbox.controlpanelWidth, Toolbox.controlpanelHeight);

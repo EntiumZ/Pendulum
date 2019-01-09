@@ -8,7 +8,20 @@ public class Vect {
 		this.setpX(x1 - x0);
 		this.setpY(y1 - y0);
 	}
-
+	
+	public Vect(Vect v1, char c, Vect v2) {
+		if(c == '+') {
+			this.setpX(v1.getpX() + v2.getpX());
+			this.setpY(v1.getpY() + v2.getpY());
+		}else if(c == '-') {
+			this.setpX(v1.getpX() - v2.getpX());
+			this.setpY(v1.getpY() - v2.getpY());
+		}else {
+			this.setpX(0);
+			this.setpY(0);
+		}		
+	}
+	
 	public int getpX() {
 		return pX;
 	}
@@ -29,9 +42,13 @@ public class Vect {
 		return pX/pY;
 	}
 	
-	public void combineVect(Vect vec) {
+	public void addVect(Vect vec) {
 		this.setpX(this.pX + vec.getpX());
 		this.setpY(this.pY + vec.getpY());
 	}
 
+	public void subVect(Vect vec) {
+		this.setpX(this.pX - vec.getpX());
+		this.setpY(this.pY - vec.getpY());
+	}
 }
