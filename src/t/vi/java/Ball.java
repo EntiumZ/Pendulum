@@ -10,7 +10,7 @@ public class Ball implements Runnable{
 
 	private int positionX = 0;
 	private int positionY = 0;
-	private int mass = Toolbox.ballMass;
+	private double mass = Toolbox.coeff[0];
 	private boolean stay = true;
 	
 	private static Ball ball = new Ball(0, 0, Toolbox.ballMass);
@@ -41,11 +41,11 @@ public class Ball implements Runnable{
 		this.positionY = positionY;
 	}
 
-	public int getMass() {
+	public double getMass() {
 		return mass;
 	}
 
-	public void setMass(int mass) {
+	public void setMass(double mass) {
 		this.mass = mass;
 	}
 

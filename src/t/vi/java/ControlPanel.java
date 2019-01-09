@@ -67,13 +67,17 @@ public class ControlPanel extends JPanel implements ActionListener{
 		valueSet.addActionListener(this);
 		reset.addActionListener(this);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == reset) {
 			ball.setStay(true);
 			System.out.println(ball.getPositionX() + "%%" +ball.getPositionY());			
-		}else if(ae.getSource() == valueSet) {
+		}else if(ae.getSource() == valueSet && ball != null) {
+			if(ball.isStay() == true) {
+				ball.setMass(Double.valueOf(fields[0].getText()));
+				System.out.println("ball mass: " + ball.getMass());
+			}
 			
 		}
 		
