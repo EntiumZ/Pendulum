@@ -13,9 +13,9 @@ public class Ball implements Runnable{
 	private double mass = Toolbox.coeff[0];
 	private boolean stay = true;
 	
-	private static Ball ball = new Ball(0, 0, Toolbox.ballMass);
+	private static Ball ball = new Ball(0, 0, Toolbox.coeff[0]);
 	
-	private Ball(int m, int x, int y) {
+	private Ball(int x, int y, double m) {
 		this.setMass(m);
 		this.setPositionX(x);
 		this.setPositionY(y);
@@ -66,6 +66,7 @@ public class Ball implements Runnable{
 			if(this.positionX > 400 && this.positionY >400) {
 				ball.setStay(true);
 				System.out.println("final:"+this.positionX + "+" +this.positionY);
+				System.out.println("ball mass:" + ball.getMass());
 				break;
 			}
 		}

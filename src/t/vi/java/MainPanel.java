@@ -15,6 +15,12 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	private int leftadjust;
 	private int topadjust;
 	
+	private Engine engine = null;
+	
+	public void setEngine(Engine e) {
+		this.engine = e;
+	}
+	
 	public int getLeftadjust() {
 		return leftadjust;
 	}
@@ -58,11 +64,9 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		int y = arg0.getY();
 		System.out.println("x= " + x +" y= " + y +"\n");
 		if(ball == null || ball.isStay() == true) {
-			ball = Ball.getBall();
-			ControlPanel.setBall(ball);
+			ball = engine.getBall();
 			ball.setPositionX(x);
 			ball.setPositionY(y);
-			ball.setMass(Toolbox.ballMass);
 		}
 		if(ball != null && ball.isStay() == true) {
 			if(ball.getPositionX() < 400 && ball.getPositionY() < 400) {

@@ -23,12 +23,18 @@ public class ControlPanel extends JPanel implements ActionListener{
 	private JButton reset = new JButton("reset");
 	private JButton valueSet = new JButton("OK");
 		
-	private static Ball ball = null;
+	private Engine engine = null;
+	
+	public void setEngine(Engine e) {
+		this.engine = e;
+	}
+	
+	private Ball ball = null;
 	
 	private JPanel[] ps = new JPanel[4];
 	
-	public static void setBall(Ball b) {
-		ball = b;
+	public void setBall() {
+		ball = engine.getBall();
 	}
 
 	public ControlPanel() {

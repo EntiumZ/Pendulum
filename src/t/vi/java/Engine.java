@@ -12,6 +12,12 @@ public class Engine {
 	private int x_lt, y_lt, v_lt;
 	private int x_nt, y_nt, v_nt;
 	private int a_t, a_lt;
+	
+	private Ball ball = Ball.getBall();
+	
+	public Ball getBall() {
+		return this.ball;
+	}
 
 	public Engine() {
 		

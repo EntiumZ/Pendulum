@@ -15,8 +15,12 @@ public class MainFrame extends JFrame {
 
 	public MainFrame(String s) {
 		super(s);
+		Engine engine = new Engine();
 		mainpanel = new MainPanel();
+		mainpanel.setEngine(engine);
 		controlpanel = new ControlPanel();
+		controlpanel.setEngine(engine);
+		controlpanel.setBall();
 		Thread t = new Thread(mainpanel);
 		t.start();
 		this.setLayout(new BorderLayout());
