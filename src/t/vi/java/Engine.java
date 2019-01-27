@@ -73,8 +73,8 @@ public class Engine {
 		int curPx = ball.getPositionX();
 		int curPy = ball.getPositionY();
 		
-		nexP[0] = curPx + (int)(curVx * dt + dt * dt * (4 * curAx - preAx) / 6);
-		nexP[1] = curPy + (int)(curVy * dt + dt * dt * (4 * curAy - preAy) / 6);
+		nexP[0] = curPx + (int)(curVx * dt + dt * dt * curAx / 2);
+		nexP[1] = curPy + (int)(curVy * dt + dt * dt * curAy / 2);
 		
 		this.getMagforce(magforce, nexP[0], nexP[1]);
 		this.getGforce(gforce,nexP[0], nexP[1]);
@@ -82,8 +82,8 @@ public class Engine {
 		nexAx = magforce[0] + gforce[0] + friction[0];
 		nexAy = magforce[1] + gforce[1] + friction[1];
 		
-		nexVx = (curVx + dt* (2 * nexAx + 5 * curAx - preAx) / 6);
-		nexVy = (curVy + dt * (2 * nexAy + 5 * curAy - preAy) / 6);
+		nexVx = (curVx + dt* curAx);
+		nexVy = (curVy + dt * curAy);
 		
 		curVx = nexVx;
 		curVy = nexVy;
