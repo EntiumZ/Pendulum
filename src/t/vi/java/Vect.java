@@ -22,6 +22,11 @@ public class Vect {
 		}		
 	}
 	
+	public Vect(int dx, int dy) {
+		this.setpX(dx);
+		this.setpY(dy);
+	}
+	
 	public int getpX() {
 		return pX;
 	}
@@ -42,6 +47,10 @@ public class Vect {
 		return pX/pY;
 	}
 	
+	public double getNorm() {
+		return Math.sqrt((double)(pX * pX + pY * pY));
+	}
+	
 	public void addVect(Vect vec) {
 		this.setpX(this.pX + vec.getpX());
 		this.setpY(this.pY + vec.getpY());
@@ -51,4 +60,11 @@ public class Vect {
 		this.setpX(this.pX - vec.getpX());
 		this.setpY(this.pY - vec.getpY());
 	}
+	
+	public void rescaleVect(double d) {
+		this.setpX((int)((double)this.pX * d));
+		this.setpY((int)((double)this.pY * d));		
+	}
+	
+	
 }

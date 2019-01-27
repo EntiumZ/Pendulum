@@ -1,5 +1,6 @@
 package t.vi.java;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 	
 	private int textlength = 5;
 	
-	private String[] slabel = {"Mass:", "Strength Coefficient:", "Gravity Coefficient:", "Friction Ceofficient:"}; 
+	private String[] slabel = {"Mass:", "Strength Coefficient:", "Gravity Coefficient:", "Friction Coefficient:"}; 
 	
 	private JLabel[] labels = new JLabel[4];
 	private JTextField[] fields = new JTextField[4];
@@ -27,15 +28,12 @@ public class ControlPanel extends JPanel implements ActionListener{
 	
 	public void setEngine(Engine e) {
 		this.engine = e;
+		this.ball = engine.getBall();
 	}
 	
 	private Ball ball = null;
 	
 	private JPanel[] ps = new JPanel[4];
-	
-	public void setBall() {
-		ball = engine.getBall();
-	}
 
 	public ControlPanel() {
 		
@@ -51,6 +49,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 		for(int i = 0; i < 4; i++) {
 			ps[i] = new JPanel();
 			ps[i].setSize(Toolbox.controlpanelWidth, Toolbox.controlpanelHeight / 4);
+			ps[i].setBackground(Color.white);
 			this.add(ps[i]);
 		}
 		

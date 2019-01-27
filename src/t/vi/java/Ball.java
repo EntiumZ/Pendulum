@@ -12,17 +12,15 @@ public class Ball implements Runnable{
 	private int positionY = 0;
 	private double mass = Toolbox.coeff[0];
 	private boolean stay = true;
+	private Engine engine = null;
 	
-	private static Ball ball = new Ball(0, 0, Toolbox.coeff[0]);
+	public void setEngine(Engine e) {
+		this.engine = e;
+	}
 	
-	private Ball(int x, int y, double m) {
-		this.setMass(m);
+	public Ball(int x, int y) {		
 		this.setPositionX(x);
 		this.setPositionY(y);
-	}
-
-	public static Ball getBall() {
-		return ball;
 	}
 	
 	public int getPositionX() {
@@ -51,25 +49,37 @@ public class Ball implements Runnable{
 
 	@Override
 	public void run() {
-		ball.setStay(false);
-		while(!ball.isStay()) {
+		this.setStay(false);
+		
+		while(!this.isStay()) {
 			
 			try {
-				Thread.sleep(40);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			
-			this.positionX += 2;
-			this.positionY += 3;
-			System.out.println(this.positionX + "+" +this.positionY);
-			if(this.positionX > 400 && this.positionY >400) {
-				ball.setStay(true);
-				System.out.println("final:"+this.positionX + "+" +this.positionY);
-				System.out.println("ball mass:" + ball.getMass());
+			if(engine.isBallClosed()) {
+				this.setStay(true);
+				break;
+			}
+			
+//			this.positionX += 2;
+//			this.positionY += 2;
+			engine.Testtt();
+			this.positionX = engine.calX();
+			this.positionY = engine.calY();
+			//System.out.println(this.positionX + ", " + this.positionY);
+			//System.out.println(engine.calX() + ", " + engine.calY());
+			
+			if(engine.isBallClosed()) {
+				this.setStay(true);
+				//System.out.println("final:"+this.positionX + "+" +this.positionY);
+				//System.out.println("ball mass:" + this.getMass());
 				break;
 			}
 		}
+		System.out.println("ball thread over");
 						
 	}
 

@@ -3,7 +3,8 @@ package t.vi.java;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JPanel;
 
 public class MainPanel extends JPanel implements MouseListener, Runnable{
@@ -12,13 +13,16 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	private int leftadjust;
 	private int topadjust;
 	
 	private Engine engine = null;
+	private Thread t = null;
 	
 	public void setEngine(Engine e) {
 		this.engine = e;
+		t = new Thread(engine.getBall());
 	}
 	
 	public int getLeftadjust() {
@@ -36,45 +40,62 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	public void setTopadjust(int topadjust) {
 		this.topadjust = topadjust;
 	}
-
-	public static final Image img = Toolbox.getImage("image/ball.png");
-	private Ball ball = null; 
 	
-	public Ball getBall() {
-		return this.ball;
-	}
+	private Ball ball = null; 
 	
 	public MainPanel() {
 		this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);
 		this.setVisible(true);
 	}	
 	
+	private Color[] colorset = {Color.blue, Color.red, Color.GREEN};
+	
 	@Override
 	public void paint(Graphics g) {		
 		super.paint(g);
-		g.setColor(Color.BLUE);
+		
+		//draw magnets
+		for(int i = 0; i < engine.getmagList().size(); i++) {
+			g.setColor(colorset[i]);
+			g.fillOval(engine.getmagList().get(i).getPositionX()-leftadjust-Toolbox.mag_size / 2, engine.getmagList().get(i).getPositionY()-topadjust-100 / 2, Toolbox.mag_size, Toolbox.mag_size);
+		}
+		
+		//draw ball
+		g.setColor(Color.black);
 		if(ball != null) {			
 			g.fillOval(ball.getPositionX()-leftadjust-Toolbox.ball_size/2, ball.getPositionY()-topadjust-Toolbox.ball_size/2, Toolbox.ball_size, Toolbox.ball_size);
 		}
+		
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
+		
 		int x = arg0.getX();
 		int y = arg0.getY();
-		System.out.println("x= " + x +" y= " + y +"\n");
-		if(ball == null || ball.isStay() == true) {
+		engine.refresh();
+		
+		System.out.println(x + ", " + y);
+		
+		if(ball == null) {
 			ball = engine.getBall();
 			ball.setPositionX(x);
 			ball.setPositionY(y);
 		}
-		if(ball != null && ball.isStay() == true) {
-			if(ball.getPositionX() < 400 && ball.getPositionY() < 400) {
+		
+		
+		
+		if(ball.isStay() == true) {
+			ball.setPositionX(x);
+			ball.setPositionY(y);
+			
+			if(ball.getPositionX() < 800 && ball.getPositionY() < 800) {
 				this.repaint();
-				Thread t = new Thread(ball);
-				t.start();
-			}			
-		}
+				if(!t.isAlive()) {
+					singleThreadExecutor.execute(t);					
+				}				
+			}
+		}		
 	}
 
 
@@ -83,14 +104,9 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	public void run() {
 		
 		while(true) {
-			if(ball!=null && ball.isStay() == false) {
-				if(ball.getPositionX() >400 && ball.getPositionY() >400) {
-					ball.setStay(true);
-				}
-			}
 			
 			try {
-				Thread.sleep(40);
+				Thread.sleep(15);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

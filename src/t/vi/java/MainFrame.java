@@ -20,7 +20,6 @@ public class MainFrame extends JFrame {
 		mainpanel.setEngine(engine);
 		controlpanel = new ControlPanel();
 		controlpanel.setEngine(engine);
-		controlpanel.setBall();
 		Thread t = new Thread(mainpanel);
 		t.start();
 		this.setLayout(new BorderLayout());
@@ -33,6 +32,6 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		Insets temp = this.getInsets();
 		mainpanel.setLeftadjust(temp.left);
-		mainpanel.setTopadjust(temp.top);		
+		mainpanel.setTopadjust(temp.top);
 	}
 }

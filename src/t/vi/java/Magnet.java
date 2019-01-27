@@ -9,14 +9,11 @@ package t.vi.java;
 public class Magnet {
 	private int positionX;
 	private int positionY;
-	private int km; //strength coefficient for single magnets
-	private int kg; //strength coefficient of pull back
+	private double km = Toolbox.km_0; //strength coefficient for single magnets
 	
-	public Magnet(int x, int y, int km, int kg) {
+	public Magnet(int x, int y) {
 		this.setPositionX(x);
-		this.setPositionY(y);
-		this.setKm(km);
-		this.setKg(kg);
+		this.setPositionY(y);		
 	}
 
 	public int getPositionX() {
@@ -35,20 +32,12 @@ public class Magnet {
 		this.positionY = positionY;
 	}
 
-	public int getKm() {
+	public double getKm() {
 		return km;
 	}
 
-	public void setKm(int km) {
+	public void setKm(double km) {
 		this.km = km;
-	}
-
-	public int getKg() {
-		return kg;
-	}
-
-	public void setKg(int kg) {
-		this.kg = kg;
 	}
 	
 }
