@@ -60,6 +60,8 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 			g.fillOval(engine.getmagList().get(i).getPositionX()-leftadjust-Toolbox.mag_size / 2, engine.getmagList().get(i).getPositionY()-topadjust-100 / 2, Toolbox.mag_size, Toolbox.mag_size);
 		}
 		
+		g.fillOval(400-leftadjust-Toolbox.mag_size / 2, 400-topadjust-Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
+		
 		//draw ball
 		g.setColor(Color.black);
 		if(ball != null) {			
