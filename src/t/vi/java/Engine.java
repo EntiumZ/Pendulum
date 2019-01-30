@@ -56,44 +56,38 @@ public class Engine {
 		nexAx = 0.0; nexAy = 0.0;
 	}
 		
-	public void Testtt() {
-		double dt = 1;
+	public void m_Calculate() {
 		double[] magforce = new double[2];
 		double[] gforce = new double[2];
 		double[] friction = new double[2];
-				
-		this.getMagforce(magforce,ball.getPositionX(), ball.getPositionY());
+
+ 		this.getMagforce(magforce,ball.getPositionX(), ball.getPositionY());
 		this.getGforce(gforce,ball.getPositionX(), ball.getPositionY());
 		this.getfriction(friction);
-		
-		curAx = 1.5 * (magforce[0] + gforce[0] + friction[0]); 
-		curAy = 1.5 * (magforce[1] + gforce[1] + friction[1]);
-		
-				
-		int curPx = ball.getPositionX();
-		int curPy = ball.getPositionY();
-		
-		nexP[0] = curPx + (int)(curVx * dt + dt * dt * curAx / 2);
-		nexP[1] = curPy + (int)(curVy * dt + dt * dt * curAy / 2);
-		
-		this.getMagforce(magforce, nexP[0], nexP[1]);
+
+ 		curAx = km * magforce[0] + kg * gforce[0] + kf * friction[0];
+		curAy = km * magforce[1] + kg * gforce[1] + kf * friction[1];
+
+ 		nexP[0] = ball.getPositionX() + (int)(curVx + (4 * curAx - preAx) / 6);
+		nexP[1] = ball.getPositionY() + (int)(curVy + (4 * curAy - preAy) / 6);
+
+ 		this.getMagforce(magforce, nexP[0], nexP[1]);
 		this.getGforce(gforce,nexP[0], nexP[1]);
-		
-		nexAx = 1.5* (magforce[0] + gforce[0] + friction[0]);
-		nexAy = 1.5 * (magforce[1] + gforce[1] + friction[1]);
-		
-		nexVx = (curVx + dt* curAx);
-		nexVy = (curVy + dt * curAy);
-		
-		curVx = nexVx;
+
+
+ 		nexAx = km * magforce[0] + kg * gforce[0] + kf * friction[0];
+		nexAy = km * magforce[1] + kg * gforce[1] + kf * friction[1];
+
+ 		nexVx = (curVx + (2 * nexAx + 5 * curAx - preAx) / 6);
+		nexVy = (curVy + (2 * nexAy + 5 * curAy - preAy) / 6);
+
+ 		curVx = nexVx;
 		curVy = nexVy;
-		
-		preAx = curAx;
+
+ 		preAx = curAx;
 		preAy = curAy;
 								
-	}	
-	
-
+	}
 	
 	public int calX() {
 		return nexP[0];
@@ -129,12 +123,12 @@ public class Engine {
 		for(int i = 0; i < magList.size(); i++) {
 			Vect v = new Vect(px, py, magList.get(i).getPositionX(),magList.get(i).getPositionY());
 			double norm = v.getNorm();
-			double temp = Math.sqrt(norm * norm + 25 * 25);
+			double temp = Math.sqrt(norm * norm + 20 * 20);
 			double x = (double)v.getpX();
 			double y = (double)v.getpY();
 			
-			result[0] += 10000.0 * x / Math.pow(temp, 3);
-			result[1] += 10000.0 * y / Math.pow(temp, 3);			
+			result[0] += 10000.0 * x / (temp * temp * temp);
+			result[1] += 10000.0 * y / (temp * temp * temp);			
 		}
 	}
 	
@@ -147,8 +141,8 @@ public class Engine {
 		double x = (double)v.getpX();
 		double y = (double)v.getpY();		
 		
-		result[0] = 0.001 * x;
-		result[1] = 0.001 * y;
+		result[0] = 0.01 * x;
+		result[1] = 0.01 * y;
 		 
 	}
 	
@@ -157,8 +151,8 @@ public class Engine {
 			result = new double[2];
 		}
 		
-		result[0] = -1* 0.07 * curVx;
-		result[1] = -1* 0.07 * curVy;
+		result[0] = -1 * curVx;
+		result[1] = -1 * curVy;
 	}
 	
 	private boolean isClosed;

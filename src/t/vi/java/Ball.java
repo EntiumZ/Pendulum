@@ -59,25 +59,10 @@ public class Ball implements Runnable{
 				e.printStackTrace();
 			}
 			
-			if(engine.isBallClosed()) {
-				this.setStay(true);
-				break;
-			}
-			
-//			this.positionX += 2;
-//			this.positionY += 2;
-			engine.Testtt();
+			engine.m_Calculate();
 			this.positionX = engine.calX();
 			this.positionY = engine.calY();
-			//System.out.println(this.positionX + ", " + this.positionY);
-			//System.out.println(engine.calX() + ", " + engine.calY());
 			
-			if(engine.isBallClosed()) {
-				this.setStay(true);
-				//System.out.println("final:"+this.positionX + "+" +this.positionY);
-				//System.out.println("ball mass:" + this.getMass());
-				break;
-			}
 		}
 		System.out.println("ball thread over");
 						

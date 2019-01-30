@@ -57,7 +57,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		//draw magnets
 		for(int i = 0; i < engine.getmagList().size(); i++) {
 			g.setColor(colorset[i]);
-			g.fillOval(engine.getmagList().get(i).getPositionX()-leftadjust-Toolbox.mag_size / 2, engine.getmagList().get(i).getPositionY()-topadjust-100 / 2, Toolbox.mag_size, Toolbox.mag_size);
+			g.fillOval(engine.getmagList().get(i).getPositionX()-leftadjust-Toolbox.mag_size / 2, engine.getmagList().get(i).getPositionY() - topadjust - Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
 		}
 		
 		g.fillOval(400-leftadjust-Toolbox.mag_size / 2, 400-topadjust-Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
