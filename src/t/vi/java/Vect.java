@@ -1,5 +1,11 @@
 package t.vi.java;
 
+/**
+ * 
+ * @author Lihua Zhao
+ *
+ */
+
 public class Vect {
 	
 	private int pX, pY;

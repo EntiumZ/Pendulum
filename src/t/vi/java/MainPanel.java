@@ -1,6 +1,7 @@
 package t.vi.java;
+
 /**
- * 
+ *@author Lihua Zhao 
  */
 
 import java.awt.*;
@@ -98,8 +99,6 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 			}
 		}		
 	}
-
-
 
 	@Override
 	public void run() {

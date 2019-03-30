@@ -1,5 +1,10 @@
 package t.vi.java;
 
+/**
+ * @author Lihua Zhao
+ * 
+ */
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

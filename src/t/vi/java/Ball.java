@@ -2,8 +2,8 @@ package t.vi.java;
 
 /**
  * 
- * @author Oak
- * moving object class in the field
+ * @author Lihua Zhao
+ * Pendulum object, called as ball
  */
 
 public class Ball implements Runnable{

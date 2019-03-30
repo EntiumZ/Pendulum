@@ -2,7 +2,7 @@ package t.vi.java;
 /**
  * 
  * @author Lihua Zhao
- * keep all constants for this project
+ * keep all constants and parameters for this project
  *
  */
 

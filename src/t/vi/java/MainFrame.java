@@ -1,13 +1,13 @@
 package t.vi.java;
 
+/**
+ * @author Lihua Zhao
+ */
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private MainPanel mainpanel = null;

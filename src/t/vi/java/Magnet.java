@@ -2,8 +2,8 @@ package t.vi.java;
 
 /**
  * 
- * @author Oak
- * Magnet class in the field
+ * @author Lihua Zhao
+ * Magnet class in the system
  */
 
 public class Magnet {
