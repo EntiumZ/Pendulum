@@ -11,7 +11,6 @@ public class Engine {
 	}
 	
 	private int mag_quat = 3;
-	//private int distance = 200;
 	private double km = Toolbox.km_0;
 	private double kg = Toolbox.kg_0;
 	private double kf = Toolbox.kf_0;
@@ -33,14 +32,11 @@ public class Engine {
 			//this.setMagPosition(temp_pos, mag_quat, i, distance);
 			magList.add(new Magnet(mag_position[i][0], mag_position[i][1]));
 			//System.out.println(magList.get(i).getPositionX() + ", " + magList.get(i).getPositionY());
-		}
-		
-		
+		}				
 	}
 	
 	private double nexVx = 0.0, nexVy = 0.0;
-	private double curVx = 0.0, curVy = 0.0;
-		 
+	private double curVx = 0.0, curVy = 0.0;		 
 	private double preAx = 0.0, preAy = 0.0;
 	private double curAx = 0.0, curAy = 0.0;
 	private double nexAx = 0.0, nexAy = 0.0;
@@ -73,7 +69,6 @@ public class Engine {
 
  		this.getMagforce(magforce, nexP[0], nexP[1]);
 		this.getGforce(gforce,nexP[0], nexP[1]);
-
 
  		nexAx = km * magforce[0] + kg * gforce[0] + kf * friction[0];
 		nexAy = km * magforce[1] + kg * gforce[1] + kf * friction[1];

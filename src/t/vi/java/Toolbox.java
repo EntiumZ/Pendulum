@@ -1,7 +1,7 @@
 package t.vi.java;
 /**
  * 
- * @author Oak
+ * @author Lihua Zhao
  * keep all constants for this project
  *
  */
@@ -21,9 +21,9 @@ public class Toolbox {
 	
 	//default parameters Mass, Strength Coefficient-km, Gravity Coefficient-kg, Friction Coefficient-kf
 	public static double mass_0 = 1.0;
-	public static double km_0 = 1;  
-	public static double kg_0 = 0.45;
-	public static double kf_0 = 0.05;	
+	public static double km_0 = 1.5;  
+	public static double kg_0 = 0.3;
+	public static double kf_0 = 0.3;	
 	public static double coeff[] = {mass_0, km_0, kg_0, kf_0};
 	
 	public static int ball_size = 30;

@@ -46,6 +46,14 @@ public class Ball implements Runnable{
 	public void setMass(double mass) {
 		this.mass = mass;
 	}
+	
+	public boolean isStay() {
+		return stay;
+	}
+
+	public void setStay(boolean b) {
+		this.stay = b;
+	}
 
 	@Override
 	public void run() {
@@ -67,15 +75,5 @@ public class Ball implements Runnable{
 		System.out.println("ball thread over");
 						
 	}
-
-	public boolean isStay() {
-		return stay;
-	}
-
-	public void setStay(boolean b) {
-		this.stay = b;
-	}
-
-
 
 }

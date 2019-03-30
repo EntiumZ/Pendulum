@@ -1,4 +1,7 @@
 package t.vi.java;
+/**
+ * 
+ */
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -8,9 +11,7 @@ import java.util.concurrent.Executors;
 import javax.swing.JPanel;
 
 public class MainPanel extends JPanel implements MouseListener, Runnable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -83,9 +84,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 			ball = engine.getBall();
 			ball.setPositionX(x);
 			ball.setPositionY(y);
-		}
-		
-		
+		}		
 		
 		if(ball.isStay() == true) {
 			ball.setPositionX(x);
