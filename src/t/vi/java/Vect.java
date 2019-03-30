@@ -3,6 +3,7 @@ package t.vi.java;
 /**
  * 
  * @author Lihua Zhao
+ * Utility tool: vector in Mathematics 
  *
  */
 

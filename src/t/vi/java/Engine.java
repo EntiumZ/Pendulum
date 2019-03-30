@@ -2,6 +2,7 @@ package t.vi.java;
 
 /**
  * @author Lihua Zhao
+ * Calculation engine for the whole program
  */
 
 import java.util.Vector;
