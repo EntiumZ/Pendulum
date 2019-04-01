@@ -1,4 +1,7 @@
 package t.vi.java;
+
+import java.awt.Color;
+
 /**
  * 
  * @author Lihua Zhao
@@ -28,8 +31,14 @@ public class Toolbox {
 	
 	public static int ball_size = 30;
 	public static int mag_size = 20;
+	public static int mag_quant = 3;
 	public static int distance = 200;
 	
 	public static double dist_allow = 3;
 	
+	public static Double[] pos_3 = {0.0, -1.0, -1.732/2, 0.5, 1.732/2, 0.5};
+	public static Double[] pos_4 = {0.0, -1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.0};
+	public static Double[] pos_5 = {0.0, -1.0, -0.9511, -0.309, -0.5878, 0.809, 0.5878, 0.809, 0.9511, -0.309};
+	
+	public static Color[] colorset = { Color.red, Color.green, Color.blue, Color.yellow, Color.orange};
 }

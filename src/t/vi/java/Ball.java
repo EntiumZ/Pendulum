@@ -57,10 +57,8 @@ public class Ball implements Runnable{
 
 	@Override
 	public void run() {
-		this.setStay(false);
-		
-		while(!this.isStay()) {
-			
+		this.setStay(false);		
+		while(!this.isStay()) {			
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
@@ -69,11 +67,9 @@ public class Ball implements Runnable{
 			
 			engine.m_Calculate();
 			this.positionX = engine.calX();
-			this.positionY = engine.calY();
-			
+			this.positionY = engine.calY();			
 		}
-		System.out.println("ball thread over");
-						
+		System.out.println("ball thread over");						
 	}
 
 }

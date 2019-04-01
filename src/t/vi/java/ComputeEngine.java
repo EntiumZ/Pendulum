@@ -1,44 +1,26 @@
 package t.vi.java;
 
-/**
- * @author Lihua Zhao
- * Calculation engine for the whole program
- */
-
 import java.util.Vector;
 
-public class Engine {
+public class ComputeEngine {
 
-	private Vector<Magnet> magList = new Vector<Magnet>();
-	
-	public Vector<Magnet> getmagList() {
-		return this.magList;
+	public ComputeEngine() {
+		
 	}
 	
-	private MagnetsCollection magnets =  new MagnetsCollection();
+	private Vector<Magnet> magList = new Vector<Magnet>();
 	
-//	private int mag_quat = 3;
+	public Vector<Magnet> getMagList() {
+		return magList;
+	}
+
+	public void setMagList(Vector<Magnet> magList) {
+		this.magList = magList;
+	}	
+	
 	private double km = Toolbox.km_0;
 	private double kg = Toolbox.kg_0;
 	private double kf = Toolbox.kf_0;
-	
-	//private int[][] mag_position = {{400, 200}, {227, 500}, {573, 500}}; //temporary solution
-	
-	private Ball ball = null;
-	
-	public Ball getBall() {
-		return this.ball;		
-	}
-
-	public Engine() {
-		ball = new Ball(0, 0);
-		ball.setEngine(this);
-		magList = magnets.getMagList();
-		
-//		for(int i = 0; i < mag_quat; i++) {
-//			magList.add(new Magnet(mag_position[i][0], mag_position[i][1]));			
-//		}				
-	}
 	
 	private double nexVx = 0.0, nexVy = 0.0;
 	private double curVx = 0.0, curVy = 0.0;		 
@@ -56,20 +38,20 @@ public class Engine {
 		nexAx = 0.0; nexAy = 0.0;
 	}
 		
-	public void m_Calculate() {
+	public void Calculate(int x, int y) {
 		double[] magforce = new double[2];
 		double[] gforce = new double[2];
 		double[] friction = new double[2];
 
- 		this.getMagforce(magforce, ball.getPositionX(), ball.getPositionY());
-		this.getGforce(gforce, ball.getPositionX(), ball.getPositionY());
+ 		this.getMagforce(magforce, x, y);
+		this.getGforce(gforce, x, y);
 		this.getfriction(friction);
 
  		curAx = km * magforce[0] + kg * gforce[0] + kf * friction[0];
 		curAy = km * magforce[1] + kg * gforce[1] + kf * friction[1];
 
- 		nexP[0] = ball.getPositionX() + (int)(curVx + (4 * curAx - preAx) / 6);
-		nexP[1] = ball.getPositionY() + (int)(curVy + (4 * curAy - preAy) / 6);
+ 		nexP[0] = x + (int)(curVx + (4 * curAx - preAx) / 6);
+		nexP[1] = y + (int)(curVy + (4 * curAy - preAy) / 6);
 
  		this.getMagforce(magforce, nexP[0], nexP[1]);
 		this.getGforce(gforce, nexP[0], nexP[1]);
@@ -92,40 +74,20 @@ public class Engine {
 		return nexP[0];
 	}
 
-	public int calY() {
-		
+	public int calY() {		
 		return nexP[1];
-	}
-	
-//	private void setMagPosition(int[] position, int num, int p, int length) {
-//		
-//		if(position.length != 2 || num < 3 || num > 6 || p < 0 || p >= num) {
-//			System.exit(0);
-//		}
-//		
-//		double temp_num = (double)num;
-//		double temp_p = (double)p;
-//		double temp_length = (double)length;
-//		
-//		position[0] = Toolbox.mainpanelWidth / 2+ (int)(Math.pow(-1.0, temp_p) * Math.sin(temp_p * 180.0 / temp_num) * temp_length);
-//		position[1] = Toolbox.mainpanelHeight / 2 + (int)(Math.pow(-1.0, temp_p) * Math.cos(temp_p * 180.0 / temp_num) * temp_length);
-//		
-//		return;
-//	}
-		
+	}		
 
 	private void getMagforce(double[] result, int px, int py) {		
 		if(result == null || result.length != 2) {
 			result = new double[2];
-		}
-		
+		}		
 		for(int i = 0; i < magList.size(); i++) {
 			Vect v = new Vect(px, py, magList.get(i).getPositionX(), magList.get(i).getPositionY());
 			double norm = v.getNorm();
 			double temp = Math.sqrt(norm * norm + 20 * 20);
 			double x = (double)v.getpX();
-			double y = (double)v.getpY();
-			
+			double y = (double)v.getpY();			
 			result[0] += 10000.0 * x / (temp * temp * temp);
 			result[1] += 10000.0 * y / (temp * temp * temp);			
 		}
@@ -134,12 +96,10 @@ public class Engine {
 	private void getGforce(double[] result, int px, int py) {
 		if(result == null || result.length != 2) {
 			result = new double[2];
-		}
-				
+		}				
 		Vect v = new Vect(px, py, Toolbox.mainpanelWidth / 2, Toolbox.mainpanelHeight / 2); 
 		double x = (double)v.getpX();
-		double y = (double)v.getpY();		
-		
+		double y = (double)v.getpY();				
 		result[0] = 0.01 * x;
 		result[1] = 0.01 * y;
 		 
@@ -148,8 +108,7 @@ public class Engine {
 	private void getfriction(double[] result) {
 		if(result == null || result.length != 2) {
 			result = new double[2];
-		}
-		
+		}		
 		result[0] = -1 * curVx;
 		result[1] = -1 * curVy;
 	}
@@ -166,9 +125,9 @@ public class Engine {
 //			//System.out.println(isClosed? "true": "false");
 //		}
 		
-		double dist = new Vect(ball.getPositionX(), ball.getPositionY(), Toolbox.mainpanelWidth / 2, Toolbox.mainpanelHeight / 2).getNorm();
+		//double dist = new Vect(ball.getPositionX(), ball.getPositionY(), Toolbox.mainpanelWidth / 2, Toolbox.mainpanelHeight / 2).getNorm();
 				
-		isClosed =  (isClosed || (dist < Toolbox.dist_allow)) && (curVx * curVx + curVy * curVy < 5);
+		//isClosed =  (isClosed || (dist < Toolbox.dist_allow)) && (curVx * curVx + curVy * curVy < 5);
 				
 		return isClosed;
 	}

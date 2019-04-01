@@ -51,7 +51,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		this.setVisible(true);
 	}	
 	
-	private Color[] colorset = {Color.blue, Color.red, Color.GREEN};
+	private Color[] colorset = Toolbox.colorset;
 	
 	@Override
 	public void paint(Graphics g) {		
