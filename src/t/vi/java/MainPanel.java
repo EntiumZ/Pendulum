@@ -15,12 +15,18 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();	
+	private Color[] colorset = Toolbox.colorset;
+	private Ball ball = null; 
+	private Engine engine = null;
+	private Thread t = null;
 	private int leftadjust;
 	private int topadjust;
 	
-	private Engine engine = null;
-	private Thread t = null;
+	public MainPanel() {
+		this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);		
+		this.setVisible(true);
+	}
 	
 	public void setEngine(Engine e) {
 		this.engine = e;
@@ -41,17 +47,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 
 	public void setTopadjust(int topadjust) {
 		this.topadjust = topadjust;
-	}
-	
-	private Ball ball = null; 
-	
-	public MainPanel() {
-		this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);
-		this.setOpaque(false);
-		this.setVisible(true);
 	}	
-	
-	private Color[] colorset = Toolbox.colorset;
 	
 	@Override
 	public void paint(Graphics g) {		
@@ -79,9 +75,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		
 		int x = arg0.getX();
 		int y = arg0.getY();
-		engine.refresh();
-		
-		System.out.println(x + ", " + y);
+		engine.refresh();		
 		
 		if(ball == null) {
 			ball = engine.getBall();
@@ -104,14 +98,11 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	}
 
 	@Override
-	public void run() {
-		
-		while(true) {
-			
+	public void run() {		
+		while(true) {			
 			try {
 				Thread.sleep(15);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+			} catch (InterruptedException e) { 
 				e.printStackTrace();
 			}
 			

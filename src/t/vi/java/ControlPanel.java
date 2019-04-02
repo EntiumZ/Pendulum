@@ -22,28 +22,22 @@ public class ControlPanel extends JPanel implements ActionListener{
 	private int textlength = 5;
 	
 	private String[] slabel = {"Mass:", "Strength Coefficient:", "Gravity Coefficient:", "Friction Coefficient:"}; 
-	
 	private JLabel[] labels = new JLabel[4];
 	private JTextField[] fields = new JTextField[4];
-	
 	private JButton reset = new JButton("reset");
 	private JButton valueSet = new JButton("OK");
-		
-	private Engine engine = null;
+	private JPanel[] ps = new JPanel[4];
+	
+	private Engine engine = null;	
+	private Ball ball = null;
+	
+	public ControlPanel() {		
+		this.panelSet();	
+	}
 	
 	public void setEngine(Engine e) {
 		this.engine = e;
 		this.ball = engine.getBall();
-	}
-	
-	private Ball ball = null;
-	
-	private JPanel[] ps = new JPanel[4];
-
-	public ControlPanel() {
-		
-		this.panelSet();
-	
 	}
 	
 	//Panel contents
@@ -81,16 +75,13 @@ public class ControlPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == reset) {
-			ball.setStay(true);
-			System.out.println(ball.getPositionX() + "%%" +ball.getPositionY());			
+			ball.setStay(true);						
 		}else if(ae.getSource() == valueSet && ball != null) {
 			if(ball.isStay() == true) {
 				ball.setMass(Double.valueOf(fields[0].getText()));
 				System.out.println("ball mass: " + ball.getMass());
-			}
-			
-		}
-		
+			}			
+		}		
 	}
 
 }

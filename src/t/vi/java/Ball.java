@@ -14,13 +14,13 @@ public class Ball implements Runnable{
 	private boolean stay = true;
 	private Engine engine = null;
 	
-	public void setEngine(Engine e) {
-		this.engine = e;
-	}
-	
 	public Ball(int x, int y) {		
 		this.setPositionX(x);
 		this.setPositionY(y);
+	}
+	
+	public void setEngine(Engine e) {
+		this.engine = e;
 	}
 	
 	public int getPositionX() {
@@ -54,9 +54,9 @@ public class Ball implements Runnable{
 	public void setStay(boolean b) {
 		this.stay = b;
 	}
-
+	
 	@Override
-	public void run() {
+	public void run() {		
 		this.setStay(false);		
 		while(!this.isStay()) {			
 			try {
@@ -65,9 +65,12 @@ public class Ball implements Runnable{
 				e.printStackTrace();
 			}
 			
-			engine.m_Calculate();
+			engine.m_Calculate();			
 			this.positionX = engine.calX();
-			this.positionY = engine.calY();			
+			this.positionY = engine.calY();
+			if(engine.isBallStay()) {
+				setStay(true);
+			}			
 		}
 		System.out.println("ball thread over");						
 	}
