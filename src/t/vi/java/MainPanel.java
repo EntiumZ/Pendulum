@@ -4,7 +4,8 @@ package t.vi.java;
  *@author Lihua Zhao 
  */
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.concurrent.ExecutorService;
@@ -18,7 +19,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();	
 	private Color[] colorset = Toolbox.colorset;
 	private Ball ball = null; 
-	private Engine engine = null;
+	private CalEngine engine = null;
 	private Thread t = null;
 	private int leftadjust;
 	private int topadjust;
@@ -28,7 +29,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		this.setVisible(true);
 	}
 	
-	public void setEngine(Engine e) {
+	public void setEngine(CalEngine e) {
 		this.engine = e;
 		t = new Thread(engine.getBall());
 	}
@@ -60,7 +61,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		}		
 		
 		//temporary mark position
-		g.fillOval(400-leftadjust-Toolbox.mag_size / 2, 400-topadjust-Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
+		//g.fillOval(400-leftadjust-Toolbox.mag_size / 2, 400-topadjust-Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
 		
 		//draw ball
 		g.setColor(Color.black);

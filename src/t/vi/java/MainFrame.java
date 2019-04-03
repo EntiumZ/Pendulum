@@ -15,14 +15,14 @@ public class MainFrame extends JFrame {
 
 	public MainFrame(String s) {
 		super(s);			
-		Engine engine = new Engine();		
+		CalEngine engine = new CalEngine();		
 		
 		mainpanel = new MainPanel();
 		mainpanel.setEngine(engine);
 				
 		controlpanel = new ControlPanel();
 		controlpanel.setEngine(engine);
-		 
+		controlpanel.setMainpanel(mainpanel); 
 		Thread t = new Thread(mainpanel);
 		t.start();		
 				

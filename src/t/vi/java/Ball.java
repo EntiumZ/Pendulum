@@ -12,14 +12,14 @@ public class Ball implements Runnable{
 	private int positionY = 0;
 	private double mass = Toolbox.coeff[0];
 	private boolean stay = true;
-	private Engine engine = null;
+	private CalEngine engine = null;
 	
 	public Ball(int x, int y) {		
 		this.setPositionX(x);
 		this.setPositionY(y);
 	}
 	
-	public void setEngine(Engine e) {
+	public void setEngine(CalEngine e) {
 		this.engine = e;
 	}
 	
@@ -53,6 +53,11 @@ public class Ball implements Runnable{
 
 	public void setStay(boolean b) {
 		this.stay = b;
+	}
+	
+	public void wipeBall() {
+		setPositionX(1000);
+		setPositionY(1000);
 	}
 	
 	@Override

@@ -7,9 +7,9 @@ package t.vi.java;
 
 import java.util.Vector;
 
-public class Engine {
-
-	private Ball ball = null;
+public class CalEngine {
+	
+	private Ball ball = null;	
 	private Vector<Magnet> magList = new Vector<Magnet>();
 	private MagnetsCollection magnets =  new MagnetsCollection();
 	
@@ -19,13 +19,15 @@ public class Engine {
 	
 	//variables for computation
 	private double curVx = 0.0, curVy = 0.0;		 
+	
+
 	private double preAx = 0.0, preAy = 0.0;
 	private double curAx = 0.0, curAy = 0.0;
 	private double nexAx = 0.0, nexAy = 0.0;
 	
 	private int[] nextP = {0, 0};
 	
-	public Engine() {
+	public CalEngine() {
 		ball = new Ball(0, 0);
 		ball.setEngine(this);
 		magList = magnets.getMagList();				
@@ -33,10 +35,26 @@ public class Engine {
 	
 	public Vector<Magnet> getmagList() {
 		return this.magList;
-	}
+	}	
 		
 	public Ball getBall() {
 		return this.ball;		
+	}
+	
+	public double getKg() {
+		return kg;
+	}
+
+	public void setKg(double kg) {
+		this.kg = kg;
+	}
+
+	public double getKf() {
+		return kf;
+	}
+
+	public void setKf(double kf) {
+		this.kf = kf;
 	}
 			
 	public void refresh() {				
@@ -141,5 +159,7 @@ public class Engine {
 		
 		return minNorm;		
 	}
+
+	
 
 }
