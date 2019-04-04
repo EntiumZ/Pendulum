@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
 		controlpanel = new ControlPanel();
 		controlpanel.setEngine(engine);
 		controlpanel.setMainpanel(mainpanel); 
+		
 		Thread t = new Thread(mainpanel);
 		t.start();		
 				

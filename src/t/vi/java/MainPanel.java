@@ -58,10 +58,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		for(int i = 0; i < engine.getmagList().size(); i++) {
 			g.setColor(colorset[i]);
 			g.fillOval(engine.getmagList().get(i).getPositionX()-leftadjust-Toolbox.mag_size / 2, engine.getmagList().get(i).getPositionY() - topadjust - Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
-		}		
-		
-		//temporary mark position
-		//g.fillOval(400-leftadjust-Toolbox.mag_size / 2, 400-topadjust-Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
+		}	
 		
 		//draw ball
 		g.setColor(Color.black);
@@ -109,8 +106,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 			
 			if(ball != null && ball.isStay() == false) {
 				this.repaint();
-			}
-			
+			}			
 		}		
 	}
 	

@@ -34,8 +34,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 	private JButton jbValueSet = new JButton("OK");
 	private JPanel[] jpPanels = new JPanel[4];
 	private JPanel jpMainpanel = null;
-	private JButton jbDefault = new JButton("Default Setting");
-	
+	private JButton jbDefault = new JButton("Default Setting");	
 	
 	private CalEngine engine = null;	
 	private Ball ball = null;
@@ -115,7 +114,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 					magList.get(i).setKm(Double.valueOf(jtFields[1].getText()));					
 				}
 				engine.setKg(Double.valueOf(jtFields[2].getText()));
-				engine.setKf(Double.valueOf(jtFields[3].getText()));			
+				engine.setKf(Double.valueOf(jtFields[3].getText()));
 			}			
 		}else if(ae.getSource() == jbDefault) {
 			ball.setStay(true);
