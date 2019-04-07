@@ -26,6 +26,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	
 	public MainPanel() {
 		this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);		
+		this.setOpaque(false);
 		this.setVisible(true);
 	}
 	
@@ -56,8 +57,10 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		
 		//draw magnets
 		for(int i = 0; i < engine.getmagList().size(); i++) {
-			g.setColor(colorset[i]);
+			g.setColor(colorset[i + 1]);			
 			g.fillOval(engine.getmagList().get(i).getPositionX()-leftadjust-Toolbox.mag_size / 2, engine.getmagList().get(i).getPositionY() - topadjust - Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
+			g.setColor(Color.BLACK);
+			g.drawOval(engine.getmagList().get(i).getPositionX()-leftadjust-Toolbox.mag_size / 2, engine.getmagList().get(i).getPositionY() - topadjust - Toolbox.mag_size / 2, Toolbox.mag_size, Toolbox.mag_size);
 		}	
 		
 		//draw ball
@@ -105,7 +108,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 			}
 			
 			if(ball != null && ball.isStay() == false) {
-				this.repaint();
+				repaint();
 			}			
 		}		
 	}

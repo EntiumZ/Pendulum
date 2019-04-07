@@ -2,7 +2,7 @@ package t.vi.java;
 
 /**
  * @author Lihua Zhao
- * Calculation engine for the whole program
+ * Calculation engine for single pendulum trace
  */
 
 import java.util.Vector;
@@ -11,6 +11,8 @@ public class CalEngine {
 	
 	private Ball ball = null;	
 	private Vector<Magnet> magList = new Vector<Magnet>();
+	
+
 	private MagnetsCollection magnets =  new MagnetsCollection();
 	
 	//default parameters
@@ -18,8 +20,15 @@ public class CalEngine {
 	private double kf = Toolbox.kf_0;
 	
 	//variables for computation
-	private double curVx = 0.0, curVy = 0.0;		 
+	private double curVx = 0.0, curVy = 0.0;
 	
+	public void setCurVx(double curVx) {
+		this.curVx = curVx;
+	}
+
+	public void setCurVy(double curVy) {
+		this.curVy = curVy;
+	}
 
 	private double preAx = 0.0, preAy = 0.0;
 	private double curAx = 0.0, curAy = 0.0;
@@ -37,6 +46,10 @@ public class CalEngine {
 		return this.magList;
 	}	
 		
+	public void setMagList(Vector<Magnet> magList) {
+		this.magList = magList;
+	}
+	
 	public Ball getBall() {
 		return this.ball;		
 	}
@@ -61,8 +74,10 @@ public class CalEngine {
 		preAx = 0.0; preAy = 0.0;
 		curAx = 0.0; curAy = 0.0;
 		nexAx = 0.0; nexAy = 0.0;
+		counter = 0;
 	}
 		
+	private int counter = 0;
 	public void m_Calculate() {
 		double[] magforce = new double[2];
 		double[] gforce = new double[2];
@@ -88,7 +103,12 @@ public class CalEngine {
 		curVy = curVy + (2 * nexAy + 5 * curAy - preAy) / 6;
 		
  		preAx = curAx;
-		preAy = curAy;								
+		preAy = curAy;
+		
+		if((int)Math.sqrt(curVx * curVx + curVy *curVy) == 0) {
+			counter++;
+		}
+				
 	}
 	
 	public int calX() {
@@ -100,11 +120,27 @@ public class CalEngine {
 	}
 	
 	public boolean isBallStay() {
-		double v = Math.sqrt(curVx * curVx + curVy *curVy);		
-		return ((int)v == 0 || (int)v == 1)&&(getMinDistance() < 10.0)? true : false;		
+		double v = Math.sqrt(curVx * curVx + curVy *curVy);
+		double minDistance = getMinDistance(ball.getPositionX(), ball.getPositionY());
+		if(((int)v == 0 || (int)v == 1) && minDistance < Toolbox.dis_allow){
+			return true;
+		}
+		
+		Vect vect = new Vect(ball.getPositionX(), ball.getPositionY(), Toolbox.mainpanelWidth / 2, Toolbox.mainpanelHeight / 2);
+		double markDistance = vect.getNorm();
+		
+		if(counter > 10) {
+			if((int)v == 0 && minDistance == markDistance) {
+				if(minDistance < 100.0) {
+					return true;
+				}
+			}			
+		}		
+		
+		return false;
 	}
 
-	private void getMagforce(double[] result, int px, int py) {		
+	protected void getMagforce(double[] result, int px, int py) {		
 		if(result == null || result.length != 2) {
 			result = new double[2];
 		}
@@ -120,7 +156,7 @@ public class CalEngine {
 		}
 	}
 	
-	private void getGforce(double[] result, int px, int py) {
+	protected void getGforce(double[] result, int px, int py) {
 		if(result == null || result.length != 2) {
 			result = new double[2];
 		}
@@ -141,12 +177,9 @@ public class CalEngine {
 		result[1] = -1 * kf * curVy;
 	}		
 	
-	private double getMinDistance() {
+	private double getMinDistance(int px, int py) {
 		
 		double minNorm = 1131.2;
-		
-		int px = ball.getPositionX();
-		int py = ball.getPositionY();
 		
 		for(int i = 0; i < magList.size(); i++) {
 			Vect vec = new Vect(px, py, magList.get(i).getPositionX(), magList.get(i).getPositionY());
