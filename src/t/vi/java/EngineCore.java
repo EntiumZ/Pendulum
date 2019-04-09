@@ -11,35 +11,34 @@ public class EngineCore {
 	private double kg = Toolbox.kg_0;
 	private double kf = Toolbox.kf_0;
 	
-	public Vector<Magnet> getMagList() {
+	protected Vector<Magnet> getMagList() {
 		return magList;
 	}
 
-	public void setMagList(Vector<Magnet> magList) {
+	protected void setMagList(Vector<Magnet> magList) {
 		this.magList = magList;
 	}
 
-	public double getKg() {
+	protected double getKg() {
 		return kg;
 	}
 
-	public void setKg(double kg) {
+	protected void setKg(double kg) {
 		this.kg = kg;
 	}
 
-	public double getKf() {
+	protected double getKf() {
 		return kf;
 	}
 
-	public void setKf(double kf) {
+	protected void setKf(double kf) {
 		this.kf = kf;
 	}	
 
 	public EngineCore() {
 	}	
 	
-	protected void setFixedPoints() {		
-		fixedPoints= new HashMap<>();
+	protected void setFixedPoints() {
 		fixedPoints.put(new Integer(0), new Integer[]{Toolbox.mainpanelWidth / 2, Toolbox.mainpanelWidth / 2});
 		for(int i = 0; i < magList.size(); i++) {
 			fixedPoints.put(new Integer(i + 1), new Integer[]{magList.get(i).getPositionX(), magList.get(i).getPositionY()});

@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 	public MainFrame(String s) {
 		super(s);			
 		CalEngine engine = new CalEngine();
-		SingleCalEngine sideengine = new SingleCalEngine(engine);		
+		BackgroundCalEngine sideengine = new BackgroundCalEngine(engine);		
 		
 		layeredPanel = new JLayeredPane();
 		mainpanel = new MainPanel();

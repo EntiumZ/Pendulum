@@ -10,7 +10,7 @@ public class BackPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-	private SingleCalEngine sideEngine = null;
+	private BackgroundCalEngine sideEngine = null;
 	private int[][]colorPatternCache = new int[80][80];
 	private Color[] csets = Toolbox.colorset;
 	private boolean isFirstPaint;
@@ -23,7 +23,7 @@ public class BackPanel extends JPanel{
 		isFirstPaint = true;		
 	}
 	
-	public void setSideEngine(SingleCalEngine sideEngine) {
+	public void setSideEngine(BackgroundCalEngine sideEngine) {
 		this.sideEngine = sideEngine;
 	}
 		
