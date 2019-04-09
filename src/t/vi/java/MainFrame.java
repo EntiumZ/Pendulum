@@ -13,16 +13,14 @@ public class MainFrame extends JFrame {
 	private MainPanel mainpanel = null;	
 	private BackPanel backpanel = null;
 	private ControlPanel controlpanel = null;
-	//private JLayeredPane layeredPanel = null;
+	private JLayeredPane layeredPanel = null;
 
 	public MainFrame(String s) {
 		super(s);			
 		CalEngine engine = new CalEngine();
-		SingleCalEngine sideengine = new SingleCalEngine(engine);
+		SingleCalEngine sideengine = new SingleCalEngine(engine);		
 		
-		
-		
-		//layeredPanel = new JLayeredPane();
+		layeredPanel = new JLayeredPane();
 		mainpanel = new MainPanel();
 		mainpanel.setEngine(engine);
 		
@@ -33,17 +31,14 @@ public class MainFrame extends JFrame {
 		controlpanel.setEngine(engine);
 		controlpanel.setMainpanel(mainpanel); 
 		
-		//layeredPanel.add(backpanel, new Integer(0), 0);
-		//layeredPanel.add(mainpanel, new Integer(1), 0);
+		layeredPanel.add(backpanel, new Integer(0), 0);
+		layeredPanel.add(mainpanel, new Integer(1), 0);
 		
 		Thread t = new Thread(mainpanel);
 		t.start();		
 				
 		this.setLayout(new BorderLayout());
-		//this.add(layeredPanel);
-		
-		this.add(mainpanel);
-		this.add(backpanel);
+		this.add(layeredPanel);		
 		this.add(controlpanel,BorderLayout.EAST);
 		
 		this.addMouseListener(mainpanel);

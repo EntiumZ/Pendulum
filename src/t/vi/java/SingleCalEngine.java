@@ -16,7 +16,6 @@ public class SingleCalEngine{
 	private HashMap<Integer, Integer[]> fixedPoints= null;
 	private HashSet<Double> closedpoints = null;
 	private boolean isFinished;
-	//private int[] temp = new int[2];
 	
 	private double curVx = 0.0, curVy = 0.0;
 	private double preAx = 0.0, preAy = 0.0;
@@ -49,7 +48,7 @@ public class SingleCalEngine{
 	
 	private void setFixedPoints() {		
 		fixedPoints= new HashMap<>();
-		fixedPoints.put(new Integer(0), new Integer[]{4, 4});
+		fixedPoints.put(new Integer(0), new Integer[]{Toolbox.mainpanelWidth / 2, Toolbox.mainpanelWidth / 2});
 		for(int i = 0; i < magLists.size(); i++) {
 			fixedPoints.put(new Integer(i + 1), new Integer[]{magLists.get(i).getPositionX(), magLists.get(i).getPositionY()});
 		}
@@ -104,7 +103,8 @@ public class SingleCalEngine{
 	 		preAx = curAx;
 			preAy = curAy;	
 			
-			isFinished = isDone(x, y);
+			//isFinished = isComputeDone(x, y);
+			isFinished = stopcounter > 10 ? true: false;
 			
 //			temp[0] = x;
 //			temp[1] = y;
@@ -157,33 +157,33 @@ public class SingleCalEngine{
 	}
 	
 	
-	private boolean isDone(int x, int y) {
-		double v = Math.sqrt(curVx * curVx + curVy * curVy);
-		double[] results = new double[2];
-		getMinDistance(x, y, results);
-		double minDistance = results[1];
-		if(((int)v == 0 || (int)v == 1) && minDistance < Toolbox.dis_allow){
-			return true;
-		}
-		
-		Vect vect = new Vect(x, y, Toolbox.mainpanelWidth / 2, Toolbox.mainpanelHeight / 2);
-		double markDistance = vect.getNorm();
-		
-		if(stopcounter > 5) {
-			if((int)curVx == 0 && (int)curVy == 0 && minDistance == markDistance) {
-				if(minDistance < 100.0) {
-					return true;
-				}
-			}
-			
-		}
-				
-		if(stopcounter > 10) {		
-			return true;			
-		}
-		
-		return false;
-	}
+//	private boolean isComputeDone(int x, int y) {
+//		double v = Math.sqrt(curVx * curVx + curVy * curVy);
+//		double[] results = new double[2];
+//		getMinDistance(x, y, results);
+//		double minDistance = results[1];
+//		if(((int)v == 0 || (int)v == 1) && minDistance < Toolbox.dis_allow){
+//			return true;
+//		}
+//		
+//		Vect vect = new Vect(x, y, Toolbox.mainpanelWidth / 2, Toolbox.mainpanelHeight / 2);
+//		double markDistance = vect.getNorm();
+//		
+////		if(stopcounter > 5) {
+////			if((int)curVx == 0 && (int)curVy == 0 && minDistance == markDistance) {
+////				if(minDistance < 100.0) {
+////					return true;
+////				}
+////			}
+////			
+////		}
+//				
+//		if(stopcounter > 10) {		
+//			return true;			
+//		}
+//		
+//		return false;
+//	}
 	
 	private void getMagforce(double[] result, int px, int py) {		
 		if(result == null || result.length != 2) {
