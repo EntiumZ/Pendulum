@@ -2,7 +2,7 @@ package t.vi.java;
 
 /**
  * @author Lihua Zhao
- * Calculation engine for pattern of the space
+ * Calculation engine for pattern of the space as the background
  */
 
 import java.util.HashSet;

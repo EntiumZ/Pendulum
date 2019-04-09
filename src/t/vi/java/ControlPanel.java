@@ -36,16 +36,26 @@ public class ControlPanel extends JPanel implements ActionListener{
 	private JPanel jpMainpanel = null;
 	private JButton jbDefault = new JButton("Default Setting");	
 	
-	private CalEngine engine = null;	
+	private CalEngine ballEngine = null;
+	private BackgroundCalEngine workEngine = null;
+	
+	public BackgroundCalEngine getWorkEngine() {
+		return workEngine;
+	}
+
+	public void setWorkEngine(BackgroundCalEngine workEngine) {
+		this.workEngine = workEngine;
+	}
+
 	private Ball ball = null;
 	
 	public ControlPanel() {		
-		this.panelSet();		
+		this.panelContentSet();		
 	}
 	
 	public void setEngine(CalEngine e) {
-		this.engine = e;
-		this.ball = engine.getBall();
+		this.ballEngine = e;
+		this.ball = ballEngine.getBall();
 	}
 	
 	public void setMainpanel(JPanel p) {
@@ -53,7 +63,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 	}
 	
 	//Panel contents
-	private void panelSet() {
+	private void panelContentSet() {
 		
 		this.setLayout(new GridLayout(4,1));
 		
@@ -109,24 +119,24 @@ public class ControlPanel extends JPanel implements ActionListener{
 		}else if(ae.getSource() == jbValueSet && ball != null) {
 			if(ball.isStay() == true) {
 				ball.setMass(Double.valueOf(jtFields[0].getText()));
-				Vector<Magnet> magList = engine.getmagList(); 
+				Vector<Magnet> magList = ballEngine.getmagList(); 
 				for(int i = 0; i < magList.size(); i++) {
 					magList.get(i).setKm(Double.valueOf(jtFields[1].getText()));					
 				}
-				engine.setKg(Double.valueOf(jtFields[2].getText()));
-				engine.setKf(Double.valueOf(jtFields[3].getText()));
+				ballEngine.setKg(Double.valueOf(jtFields[2].getText()));
+				ballEngine.setKf(Double.valueOf(jtFields[3].getText()));
 			}			
 		}else if(ae.getSource() == jbDefault) {
 			ball.setStay(true);
 			ball.wipeBall();
 			jpMainpanel.repaint();
 			ball.setMass(Toolbox.mass_0);
-			Vector<Magnet> magList = engine.getmagList(); 
+			Vector<Magnet> magList = ballEngine.getmagList(); 
 			for(int i = 0; i < magList.size(); i++) {
 				magList.get(i).setKm(Toolbox.km_0);					
 			}
-			engine.setKg(Toolbox.kg_0);
-			engine.setKf(Toolbox.kf_0);			
+			ballEngine.setKg(Toolbox.kg_0);
+			ballEngine.setKf(Toolbox.kf_0);			
 			setLabelsText();
 		}		
 	}
