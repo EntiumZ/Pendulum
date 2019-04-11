@@ -8,10 +8,6 @@ public class TraceCalEngine extends EngineCore{
 	private double nexAx = 0.0, nexAy = 0.0;
 	private int trace[][] = new int[301][2];
 
-	public int[][] getTrace() {
-		return trace;
-	}
-
 	public TraceCalEngine() {
 		setMagList(new MagnetsCollection().getMagList());
 	}
@@ -23,24 +19,23 @@ public class TraceCalEngine extends EngineCore{
 		curVx = 0.0; curVy = 0.0;
 	}
 	
-	public int[][] traceCalculate(int x, int y) {
-		return new int[2][2];
-	}
-	
 	public int[][] computePath(int x, int y) {
 		
 		double[] magforce = new double[2];
 		double[] gforce = new double[2];
 		double[] friction = new double[2];
+		
+		trace[0][0] = x;
+		trace[0][1] = y;
 				
-		for(int i = 0; i < 301; i++) {
+		for(int i = 1; i < 301; i++) {
 			
 			magforce[0] = 0.0;
 			magforce[1] = 0.0;
 			gforce[0] = 0.0;
 			gforce[1] = 0.0;
 			friction[0] = 0.0;
-			friction[0] = 0.0;
+			friction[1] = 0.0;
 			
 			getMagforce(magforce, x, y);
 			getGforce(gforce, x, y);
@@ -49,8 +44,8 @@ public class TraceCalEngine extends EngineCore{
 	 		curAx = magforce[0] + gforce[0] + friction[0];
 			curAy = magforce[1] + gforce[1] + friction[1];			
 
-	 		x = x + (int)(curVx + (4 * curAx - preAx) / 6);
-			y = y + (int)(curVy + (4 * curAy - preAy) / 6);
+	 		x += (int)(curVx + (4 * curAx - preAx) / 6);
+			y += (int)(curVy + (4 * curAy - preAy) / 6);
 
 	 		getMagforce(magforce, x, y);
 			getGforce(gforce, x, y);
@@ -58,8 +53,8 @@ public class TraceCalEngine extends EngineCore{
 	 		nexAx = magforce[0] + gforce[0] + friction[0];
 			nexAy = magforce[1] + gforce[1] + friction[1];
 
-			curVx = curVx + (2 * nexAx + 5 * curAx - preAx) / 6;
-			curVy = curVy + (2 * nexAy + 5 * curAy - preAy) / 6;			
+			curVx += (2 * nexAx + 5 * curAx - preAx) / 6;
+			curVy += (2 * nexAy + 5 * curAy - preAy) / 6;			
 			
 	 		preAx = curAx;
 			preAy = curAy;
@@ -68,8 +63,8 @@ public class TraceCalEngine extends EngineCore{
 			trace[i][1] = y;			
 		}
 		
-		//getClosedPoint(x, y, results);				
-		return getTrace();		
+		return trace;		
 	}
+	
 
 }

@@ -15,6 +15,40 @@ public class BackPanel extends JPanel{
 	
 	private int leftadjust;
 	private int topadjust;
+		
+	public BackPanel() {
+		this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);
+		this.setVisible(true);
+		isFirstPaint = true;		
+	}
+	
+	public void setSideEngine(BackgroundCalEngine sideEngine) {
+		this.workEngine = sideEngine;
+	}
+
+	public void setFirstPaint(boolean isFirstPaint) {
+		this.isFirstPaint = isFirstPaint;
+	}	
+		
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		int index = 0;
+		for(int i = 0; i < 799; i+=5) {
+			for(int j = 0; j < 799; j+=5) {
+				if(isFirstPaint) {
+					workEngine.refresh();
+					index = workEngine.computePath(i, j);
+					colorPatternCache[i / 5][j / 5] =  index;						
+				}else {
+					index = colorPatternCache[i / 5][j / 5];
+				}				
+				g.setColor(csets[index]);				
+				g.fillRect(i - leftadjust - 5, j - topadjust - 5, 10, 10);
+			}
+		}
+		isFirstPaint = false;
+	}	
 	
 	public int getLeftadjust() {
 		return leftadjust;
@@ -31,45 +65,5 @@ public class BackPanel extends JPanel{
 	public void setTopadjust(int topadjust) {
 		this.topadjust = topadjust;
 	}
-	
-	public BackPanel() {
-		this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);
-		this.setVisible(true);
-		isFirstPaint = true;		
-	}
-	
-	public void setSideEngine(BackgroundCalEngine sideEngine) {
-		this.workEngine = sideEngine;
-	}
-	
-	public boolean isFirstPaint() {
-		return isFirstPaint;
-	}
-
-	public void setFirstPaint(boolean isFirstPaint) {
-		this.isFirstPaint = isFirstPaint;
-	}	
-		
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		int index = 0;
-		Color c = g.getColor();
-		for(int i = 0; i < 799; i+=5) {
-			for(int j = 0; j < 799; j+=5) {
-				if(isFirstPaint) {
-					workEngine.refresh();
-					index = workEngine.computePath(i, j);
-					colorPatternCache[i / 5][j / 5] =  index;						
-				}else {
-					index = colorPatternCache[i / 5][j / 5];
-				}				
-				g.setColor(csets[index]);				
-				g.fillRect(i - leftadjust, j - topadjust, 10, 10);
-			}
-		}			
-		g.setColor(c);
-		isFirstPaint = false;
-	}	
 
 }

@@ -34,8 +34,14 @@ public class MainFrame extends JFrame {
 		tracepanel.setBall(engine.getBall());
 		
 		controlpanel = new ControlPanel();
-		controlpanel.setEngine(engine);
-		controlpanel.setMainpanel(mainpanel); 
+		controlpanel.setBallEngine(engine);
+		controlpanel.setMainpanel(mainpanel);
+		
+		controlpanel.setPattenEngine(sideengine);
+		controlpanel.setBackpanel(backpanel);
+		
+		controlpanel.setTraceEngine(traceengine);
+		controlpanel.setTracepanel(tracepanel);
 		
 		layeredPanel.add(backpanel, new Integer(0), 0);
 		layeredPanel.add(tracepanel, new Integer(1), 0);

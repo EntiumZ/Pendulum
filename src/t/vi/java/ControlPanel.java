@@ -27,25 +27,23 @@ public class ControlPanel extends JPanel implements ActionListener{
 	private int textlength = 5;
 	
 	private JLabel jlTitle = new JLabel("Magnetic");
-	private String[] slabel = {"Mass:", "Strength Coefficient:", "Gravity Coefficient:", "Friction Coefficient:"}; 
-	private JLabel[] jlLabels = new JLabel[4];
-	private JTextField[] jtFields = new JTextField[4];
+	private String[] slabel = {"Strength Coefficient:", "Gravity Coefficient:", "Friction Coefficient:"}; 
+	private JLabel[] jlLabels = new JLabel[3];
+	private JLabel kmLabel = new JLabel("1.0"); //label for km coefficient
+	private JTextField[] jtFields = new JTextField[3];
 	private JButton jbReset = new JButton("reset");
-	private JButton jbValueSet = new JButton("OK");
+	private JButton jbOk = new JButton("OK");
 	private JPanel[] jpPanels = new JPanel[4];
-	private JPanel jpMainpanel = null;
+	
 	private JButton jbDefault = new JButton("Default Setting");	
 	
-	private CalEngine ballEngine = null;
-	private BackgroundCalEngine workEngine = null;
+	private MainPanel mainpanel = null;
+	private BackPanel backpanel = null;
+	private TracePanel tracepanel = null;
 	
-	public BackgroundCalEngine getWorkEngine() {
-		return workEngine;
-	}
-
-	public void setWorkEngine(BackgroundCalEngine workEngine) {
-		this.workEngine = workEngine;
-	}
+	private CalEngine ballEngine = null;
+	private BackgroundCalEngine patternEngine = null;
+	private TraceCalEngine traceEngine = null; 
 
 	private Ball ball = null;
 	
@@ -53,18 +51,34 @@ public class ControlPanel extends JPanel implements ActionListener{
 		this.panelContentSet();		
 	}
 	
-	public void setEngine(CalEngine e) {
-		this.ballEngine = e;
+	public void setBallEngine(CalEngine engine) {
+		this.ballEngine = engine;
 		this.ball = ballEngine.getBall();
 	}
 	
-	public void setMainpanel(JPanel p) {
-		jpMainpanel = p;
+	public void setPattenEngine(BackgroundCalEngine engine) {
+		patternEngine = engine;
 	}
 	
+	public void setTraceEngine(TraceCalEngine engine) {
+		traceEngine = engine;
+	}
+	
+	public void setMainpanel(MainPanel p) {
+		mainpanel = p;
+	}
+	
+	public void setBackpanel(BackPanel p) {
+		backpanel = p;
+	}
+	
+	public void setTracepanel(TracePanel p) {
+		tracepanel = p;
+	}
 	//Panel contents
 	private void panelContentSet() {
 		
+		//whole panel consists 4 sub-panel
 		this.setLayout(new GridLayout(4,1));
 		
 		for(int i = 0; i < 4; i++) {
@@ -74,6 +88,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 			this.add(jpPanels[i]);
 		}
 		
+		//sub-panel 0 setup, display title
 		jpPanels[0].setLayout(new BorderLayout());
 		jpPanels[0].add(jlTitle, BorderLayout.CENTER);
 		String text = "<html>Magnetic<br/>Pendulum</html>";
@@ -83,7 +98,9 @@ public class ControlPanel extends JPanel implements ActionListener{
 		jlTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
-		for(int i = 0; i < 4; i++) {
+		//sub-panel 1 setup, add labels and set text field
+		jlLabels[0] = new JLabel(slabel[0]);
+		for(int i = 1; i < 3; i++) {
 			jlLabels[i] = new JLabel(slabel[i]);
 			jtFields[i] = new JTextField(textlength);
 		}
@@ -91,19 +108,23 @@ public class ControlPanel extends JPanel implements ActionListener{
 		jpPanels[1].setLayout(new GridLayout(5,2,20,10));
 		
 		setLabelsText();
-				
-		jpPanels[1].add(jbValueSet);		
+		
+		//two buttons
+		jpPanels[1].add(jbOk);		
 		jpPanels[1].add(jbReset);
 		this.setSize(Toolbox.controlpanelWidth, Toolbox.controlpanelHeight);
-		jbValueSet.addActionListener(this);
+		jbOk.addActionListener(this);
 		jbReset.addActionListener(this);
 		
+		//sub-panel 2 setup, only add 1 button for default reset
 		jpPanels[2].add(jbDefault);
 		jbDefault.addActionListener(this);
 	}
 	
-	private void setLabelsText() {		
-		for(int i = 0; i < 4; i++) {
+	private void setLabelsText() {
+		jpPanels[1].add(jlLabels[0]);
+		jpPanels[1].add(kmLabel);
+		for(int i = 1; i < 3; i++) {
 			jpPanels[1].add(jlLabels[i]);
 			jpPanels[1].add(jtFields[i]);
 			jtFields[i].setText(Double.toString(Toolbox.coeff[i]));
@@ -115,29 +136,45 @@ public class ControlPanel extends JPanel implements ActionListener{
 		if(ae.getSource() == jbReset) {
 			ball.setStay(true);
 			ball.wipeBall();
-			jpMainpanel.repaint();
-		}else if(ae.getSource() == jbValueSet && ball != null) {
-			if(ball.isStay() == true) {
-				ball.setMass(Double.valueOf(jtFields[0].getText()));
-				Vector<Magnet> magList = ballEngine.getMagList(); 
-				for(int i = 0; i < magList.size(); i++) {
-					magList.get(i).setKm(Double.valueOf(jtFields[1].getText()));					
-				}
-				ballEngine.setKg(Double.valueOf(jtFields[2].getText()));
-				ballEngine.setKf(Double.valueOf(jtFields[3].getText()));
+			mainpanel.repaint();
+			tracepanel.setReady(false);
+			tracepanel.repaint();
+		}else if(ae.getSource() == jbOk && ball != null) {
+			if(ball.isStay() == true) {				
+				double kg = Double.valueOf(jtFields[1].getText());
+				double kf = Double.valueOf(jtFields[2].getText());
+				
+				ballEngine.setKg(kg);
+				ballEngine.setKf(kf);				
+				patternEngine.setKg(kg);
+				patternEngine.setKf(kf);				
+				traceEngine.setKg(kg);
+				traceEngine.setKf(kf);
+				
+				ball.wipeBall();
+				mainpanel.repaint();				
+				tracepanel.setReady(false);
+				tracepanel.repaint();				
+				backpanel.setFirstPaint(true);
+				backpanel.repaint();
 			}			
 		}else if(ae.getSource() == jbDefault) {
+			setLabelsText();
+			
+			ballEngine.setKg(Toolbox.kg_0);
+			ballEngine.setKf(Toolbox.kf_0);
+			patternEngine.setKg(Toolbox.kg_0);
+			patternEngine.setKf(Toolbox.kf_0);
+			traceEngine.setKg(Toolbox.kg_0);
+			traceEngine.setKf(Toolbox.kf_0);
+			
 			ball.setStay(true);
 			ball.wipeBall();
-			jpMainpanel.repaint();
-			ball.setMass(Toolbox.mass_0);
-			Vector<Magnet> magList = ballEngine.getMagList(); 
-			for(int i = 0; i < magList.size(); i++) {
-				magList.get(i).setKm(Toolbox.km_0);					
-			}
-			ballEngine.setKg(Toolbox.kg_0);
-			ballEngine.setKf(Toolbox.kf_0);			
-			setLabelsText();
+			mainpanel.repaint();
+			backpanel.setFirstPaint(true);
+			backpanel.repaint();
+			tracepanel.setReady(false);
+			tracepanel.repaint();			
 		}		
 	}
 

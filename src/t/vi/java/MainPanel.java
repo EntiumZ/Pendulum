@@ -21,6 +21,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	private Ball ball = null; 
 	private CalEngine engine = null;
 	private Thread t = null;
+	
 	private int leftadjust;
 	private int topadjust;
 	
@@ -33,23 +34,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	public void setEngine(CalEngine e) {
 		this.engine = e;
 		t = new Thread(engine.getBall());
-	}
-	
-	public int getLeftadjust() {
-		return leftadjust;
-	}
-
-	public void setLeftadjust(int leftadjust) {
-		this.leftadjust = leftadjust;
-	}
-		
-	public int getTopadjust() {
-		return topadjust;
-	}
-
-	public void setTopadjust(int topadjust) {
-		this.topadjust = topadjust;
-	}	
+	}		
 	
 	@Override
 	public void paint(Graphics g) {		
@@ -111,6 +96,22 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 				repaint();
 			}			
 		}		
+	}
+	
+	public int getLeftadjust() {
+		return leftadjust;
+	}
+
+	public void setLeftadjust(int leftadjust) {
+		this.leftadjust = leftadjust;
+	}
+		
+	public int getTopadjust() {
+		return topadjust;
+	}
+
+	public void setTopadjust(int topadjust) {
+		this.topadjust = topadjust;
 	}
 	
 	//implementation not need

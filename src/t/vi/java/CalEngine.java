@@ -41,15 +41,24 @@ public class CalEngine extends EngineCore{
 		preAx = 0.0; preAy = 0.0;
 		curAx = 0.0; curAy = 0.0;
 		nexAx = 0.0; nexAy = 0.0;
+		curVx = 0.0; curVy = 0.0;
 		counter = 0;
 		stopcounter = 0;
 	}		
 	
-	public void m_Calculate() {
-		double[] magforce = new double[2];
-		double[] gforce = new double[2];
-		double[] friction = new double[2];
-		double[] results = new double[2];
+	private double[] magforce = new double[2];
+	private double[] gforce = new double[2];
+	private double[] friction = new double[2];
+	private double[] results = new double[2];
+	
+	public int[] m_Calculate() {
+		
+		magforce[0] = 0.0;
+		magforce[1] = 0.0;
+		gforce[0] = 0.0;
+		gforce[1] = 0.0;
+		friction[0] = 0.0;
+		friction[1] = 0.0;		
 
  		this.getMagforce(magforce, ball.getPositionX(), ball.getPositionY());
 		this.getGforce(gforce, ball.getPositionX(), ball.getPositionY());
@@ -83,6 +92,8 @@ public class CalEngine extends EngineCore{
 				stopcounter = 0;
 			}
 		}
+		
+		return nextP;
 				
 	}
 	

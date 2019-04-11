@@ -10,9 +10,11 @@ public class Ball implements Runnable{
 
 	private int positionX = 0;
 	private int positionY = 0;
-	private double mass = Toolbox.coeff[0];
+	private double mass = Toolbox.mass_0;
 	private boolean stay = true;
 	private CalEngine engine = null;
+	
+	private int[] newposition = null;
 	
 	public Ball(int x, int y) {		
 		this.setPositionX(x);
@@ -70,9 +72,9 @@ public class Ball implements Runnable{
 				e.printStackTrace();
 			}
 			
-			engine.m_Calculate();			
-			this.positionX = engine.calX();
-			this.positionY = engine.calY();
+			newposition = engine.m_Calculate();			
+			this.positionX = newposition[0];
+			this.positionY = newposition[1];
 			if(engine.isBallStay()) {
 				setStay(true);
 			}			

@@ -24,27 +24,7 @@ public class BackgroundCalEngine extends EngineCore{
 		closedpoints = new HashSet<>();
 		isFinished = false;			
 	}	
-	
-	@Override
-	public double getKg() {
-		return super.getKg();
-	}
-	
-	@Override
-	public void setKg(double kg) {
-		super.setKg(kg);
-	}
-
-	@Override
-	public double getKf() {
-		return super.getKf();
-	}
-
-	@Override
-	public void setKf(double kf) {
-		super.setKg(kf);
-	}
-	
+		
 	public void refresh() {		
 		preAx = 0.0; preAy = 0.0;
 		curAx = 0.0; curAy = 0.0;
@@ -70,7 +50,7 @@ public class BackgroundCalEngine extends EngineCore{
 			gforce[0] = 0.0;
 			gforce[1] = 0.0;
 			friction[0] = 0.0;
-			friction[0] = 0.0;
+			friction[1] = 0.0;
 			
 			getMagforce(magforce, x, y);
 			getGforce(gforce, x, y);

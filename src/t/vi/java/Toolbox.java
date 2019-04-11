@@ -23,9 +23,9 @@ public class Toolbox {
 	//default parameters Mass, Strength Coefficient-km, Gravity Coefficient-kg, Friction Coefficient-kf
 	public static double mass_0 = 1.0;
 	public static double km_0 = 1.0;  
-	public static double kg_0 = 0.4;
+	public static double kg_0 = 0.5;
 	public static double kf_0 = 0.05;	
-	public static double coeff[] = {mass_0, km_0, kg_0, kf_0};
+	public static double coeff[] = {km_0, kg_0, kf_0};
 	
 	public static int ball_size = 30;
 	public static int mag_size = 20;
