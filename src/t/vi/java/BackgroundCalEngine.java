@@ -9,7 +9,6 @@ import java.util.HashSet;
 
 public class BackgroundCalEngine extends EngineCore{
 	
-	private CalEngine mainEngine = null;
 	private HashSet<Double> closedpoints = null;
 	private int stopcounter = 0;
 	private boolean isFinished;
@@ -19,17 +18,12 @@ public class BackgroundCalEngine extends EngineCore{
 	private double curAx = 0.0, curAy = 0.0;
 	private double nexAx = 0.0, nexAy = 0.0;	
 	
-	public BackgroundCalEngine(CalEngine e) {
-		setmainEngine(e);
+	public BackgroundCalEngine() {
 		setMagList(new MagnetsCollection().getMagList());		
 		setFixedPoints();
 		closedpoints = new HashSet<>();
 		isFinished = false;			
 	}	
-	
-	public void setmainEngine(CalEngine e) {
-		mainEngine = e;
-	}
 	
 	@Override
 	public double getKg() {
@@ -100,7 +94,7 @@ public class BackgroundCalEngine extends EngineCore{
 	 		preAx = curAx;
 			preAy = curAy;	
 			
-			isFinished = stopcounter > 10 ? true: false;
+			
 			
 			intercounter++;
 			if(intercounter > 300) {
@@ -112,6 +106,8 @@ public class BackgroundCalEngine extends EngineCore{
 					stopcounter = 0;
 				}
 			}
+			
+			isFinished = stopcounter > 10 ? true: false;
 			
 		}
 		getClosedPoint(x, y, results);				

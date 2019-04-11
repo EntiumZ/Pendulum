@@ -1,5 +1,10 @@
 package t.vi.java;
 
+/**
+ * @author Lihua Zhao
+ * General data and methods for computation Engine
+ */
+
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -10,6 +15,10 @@ public class EngineCore {
 	
 	private double kg = Toolbox.kg_0;
 	private double kf = Toolbox.kf_0;
+	
+	//create EngineCore instance not allowed
+	protected EngineCore() {
+	}
 	
 	protected Vector<Magnet> getMagList() {
 		return magList;
@@ -33,9 +42,6 @@ public class EngineCore {
 
 	protected void setKf(double kf) {
 		this.kf = kf;
-	}	
-
-	public EngineCore() {
 	}	
 	
 	protected void setFixedPoints() {
@@ -94,8 +100,7 @@ public class EngineCore {
 		result[0] = kg * 0.01 * x;
 		result[1] = kg * 0.01 * y;
 		 
-	}
-	
+	}	
 	
 	protected void getfriction(double[] result, double curVx, double curVy) {
 		if(result == null || result.length != 2) {

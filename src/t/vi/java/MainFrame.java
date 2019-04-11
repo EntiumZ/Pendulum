@@ -12,13 +12,15 @@ public class MainFrame extends JFrame {
 	
 	private MainPanel mainpanel = null;	
 	private BackPanel backpanel = null;
+	private TracePanel tracepanel = null;
 	private ControlPanel controlpanel = null;
 	private JLayeredPane layeredPanel = null;
 
 	public MainFrame(String s) {
 		super(s);			
 		CalEngine engine = new CalEngine();
-		BackgroundCalEngine sideengine = new BackgroundCalEngine(engine);		
+		BackgroundCalEngine sideengine = new BackgroundCalEngine();
+		TraceCalEngine traceengine = new TraceCalEngine();
 		
 		layeredPanel = new JLayeredPane();
 		mainpanel = new MainPanel();
@@ -27,12 +29,17 @@ public class MainFrame extends JFrame {
 		backpanel = new BackPanel();
 		backpanel.setSideEngine(sideengine);
 		
+		tracepanel = new TracePanel();
+		tracepanel.setEngine(traceengine);
+		tracepanel.setBall(engine.getBall());
+		
 		controlpanel = new ControlPanel();
 		controlpanel.setEngine(engine);
 		controlpanel.setMainpanel(mainpanel); 
 		
 		layeredPanel.add(backpanel, new Integer(0), 0);
-		layeredPanel.add(mainpanel, new Integer(1), 0);
+		layeredPanel.add(tracepanel, new Integer(1), 0);
+		layeredPanel.add(mainpanel, new Integer(2), 0);
 		
 		Thread t = new Thread(mainpanel);
 		t.start();		
@@ -42,6 +49,7 @@ public class MainFrame extends JFrame {
 		this.add(controlpanel,BorderLayout.EAST);
 		
 		this.addMouseListener(mainpanel);
+		this.addMouseListener(tracepanel);
 		
 		this.setSize(Toolbox.frameWidth, Toolbox.frameHeigth);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,6 +57,10 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		Insets temp = this.getInsets();
 		mainpanel.setLeftadjust(temp.left);
-		mainpanel.setTopadjust(temp.top);		
+		mainpanel.setTopadjust(temp.top);
+		backpanel.setLeftadjust(temp.left);
+		backpanel.setTopadjust(temp.top);
+		tracepanel.setLeftadjust(temp.left);
+		tracepanel.setTopadjust(temp.top);		
 	}
 }

@@ -119,7 +119,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 		}else if(ae.getSource() == jbValueSet && ball != null) {
 			if(ball.isStay() == true) {
 				ball.setMass(Double.valueOf(jtFields[0].getText()));
-				Vector<Magnet> magList = ballEngine.getmagList(); 
+				Vector<Magnet> magList = ballEngine.getMagList(); 
 				for(int i = 0; i < magList.size(); i++) {
 					magList.get(i).setKm(Double.valueOf(jtFields[1].getText()));					
 				}
@@ -131,7 +131,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 			ball.wipeBall();
 			jpMainpanel.repaint();
 			ball.setMass(Toolbox.mass_0);
-			Vector<Magnet> magList = ballEngine.getmagList(); 
+			Vector<Magnet> magList = ballEngine.getMagList(); 
 			for(int i = 0; i < magList.size(); i++) {
 				magList.get(i).setKm(Toolbox.km_0);					
 			}
