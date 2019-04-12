@@ -1,5 +1,12 @@
 package t.vi.java;
 
+/**
+ * 
+ * @author EntiumZ
+ * Put all magnets into 1 set, easy to manage
+ * 
+ */
+
 import java.util.Vector;
 import java.util.HashMap;
 

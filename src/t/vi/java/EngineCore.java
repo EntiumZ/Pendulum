@@ -1,8 +1,10 @@
 package t.vi.java;
 
 /**
- * @author Lihua Zhao
- * General data and methods for computation Engine
+ * 
+ * @author EntiumZ
+ * Engine core, general data and methods for computation Engine
+ * 
  */
 
 import java.util.HashMap;
@@ -71,7 +73,7 @@ public class EngineCore {
 		
 		results[0] = minIndex;
 		results[1] = minNorm;		
-	}	
+	}
 	
 	protected void getMagforce(double[] result, int px, int py) {		
 		if(result == null || result.length != 2) {

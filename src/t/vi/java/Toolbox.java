@@ -4,8 +4,8 @@ import java.awt.Color;
 
 /**
  * 
- * @author Lihua Zhao
- * keep all constants and parameters for this project
+ * @author EntiumZ
+ * Keep all constants and parameters for this project
  *
  */
 

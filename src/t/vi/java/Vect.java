@@ -2,7 +2,7 @@ package t.vi.java;
 
 /**
  * 
- * @author Lihua Zhao
+ * @author EntiumZ
  * Utility tool: vector in Mathematics 
  *
  */

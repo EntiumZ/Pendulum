@@ -1,14 +1,16 @@
 package t.vi.java;
 
+/**
+ * 
+ * @author EntiumZ
+ * Calculation engine for single pendulum trace
+ * 
+ */
+
 import java.util.HashSet;
 import java.util.Vector;
 
-/**
- * @author Lihua Zhao
- * Calculation engine for single pendulum trace
- */
-
-public class CalEngine extends EngineCore{
+public class BallEngine extends EngineCore{
 	
 	private HashSet<Double> closedpoints = new HashSet<>();
 	private Ball ball = null;	
@@ -22,7 +24,7 @@ public class CalEngine extends EngineCore{
 	private double nexAx = 0.0, nexAy = 0.0;	
 	private int[] nextP = {0, 0};
 	
-	public CalEngine() {
+	public BallEngine() {
 		ball = new Ball(0, 0);
 		ball.setEngine(this);
 		setMagList(new MagnetsCollection().getMagList());		
@@ -95,14 +97,6 @@ public class CalEngine extends EngineCore{
 		
 		return nextP;
 				
-	}
-	
-	public int calX() {
-		return nextP[0];
-	}
-
-	public int calY() {		
-		return nextP[1];
 	}
 	
 	public boolean isBallStay() {		

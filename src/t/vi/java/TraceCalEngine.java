@@ -1,5 +1,12 @@
 package t.vi.java;
 
+/**
+ * 
+ * @author EntiumZ
+ * Engine for compute the trace of pendulum
+ *
+ */
+
 public class TraceCalEngine extends EngineCore{
 	
 	private double curVx = 0.0, curVy = 0.0;
@@ -19,7 +26,7 @@ public class TraceCalEngine extends EngineCore{
 		curVx = 0.0; curVy = 0.0;
 	}
 	
-	public int[][] computePath(int x, int y) {
+	public int[][] m_ComputePath(int x, int y) {
 		
 		double[] magforce = new double[2];
 		double[] gforce = new double[2];

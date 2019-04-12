@@ -1,29 +1,36 @@
 package t.vi.java;
 
+/**
+ * 
+ * @author Entiumz
+ * Panel for basin pattern display
+ * 
+ */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-public class BackPanel extends JPanel{
+public class BasinPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-	private BackgroundCalEngine workEngine = null;
-	private int[][]colorPatternCache = new int[801][801];
-	private Color[] csets = Toolbox.colorset;
+	private BasinCalEngine basinEngine = null;
+	private int[][]colorPatternCache = new int[160][160];
+	private Color[] colorSets = Toolbox.colorset;
 	private boolean isFirstPaint;
 	
 	private int leftadjust;
 	private int topadjust;
 		
-	public BackPanel() {
+	public BasinPanel() {
 		this.setSize(Toolbox.mainpanelWidth, Toolbox.mainpanelHeight);
 		this.setVisible(true);
 		isFirstPaint = true;		
 	}
 	
-	public void setSideEngine(BackgroundCalEngine sideEngine) {
-		this.workEngine = sideEngine;
+	public void setSideEngine(BasinCalEngine sideEngine) {
+		this.basinEngine = sideEngine;
 	}
 
 	public void setFirstPaint(boolean isFirstPaint) {
@@ -37,13 +44,13 @@ public class BackPanel extends JPanel{
 		for(int i = 0; i < 799; i+=5) {
 			for(int j = 0; j < 799; j+=5) {
 				if(isFirstPaint) {
-					workEngine.refresh();
-					index = workEngine.computePath(i, j);
+					basinEngine.refresh();
+					index = basinEngine.m_ComputePaths(i, j);
 					colorPatternCache[i / 5][j / 5] =  index;						
 				}else {
 					index = colorPatternCache[i / 5][j / 5];
 				}				
-				g.setColor(csets[index]);				
+				g.setColor(colorSets[index]);				
 				g.fillRect(i - leftadjust - 5, j - topadjust - 5, 10, 10);
 			}
 		}

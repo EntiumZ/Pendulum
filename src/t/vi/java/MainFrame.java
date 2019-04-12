@@ -1,7 +1,10 @@
 package t.vi.java;
 
 /**
- * @author Lihua Zhao
+ * 
+ * @author EntiumZ
+ * Main frame window for the app
+ * 
  */
 
 import javax.swing.*;
@@ -11,33 +14,33 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private MainPanel mainpanel = null;	
-	private BackPanel backpanel = null;
+	private BasinPanel backpanel = null;
 	private TracePanel tracepanel = null;
 	private ControlPanel controlpanel = null;
 	private JLayeredPane layeredPanel = null;
 
 	public MainFrame(String s) {
 		super(s);			
-		CalEngine engine = new CalEngine();
-		BackgroundCalEngine sideengine = new BackgroundCalEngine();
+		BallEngine ballengine = new BallEngine();
+		BasinCalEngine basinengine = new BasinCalEngine();
 		TraceCalEngine traceengine = new TraceCalEngine();
 		
 		layeredPanel = new JLayeredPane();
 		mainpanel = new MainPanel();
-		mainpanel.setEngine(engine);
+		mainpanel.setEngine(ballengine);
 		
-		backpanel = new BackPanel();
-		backpanel.setSideEngine(sideengine);
+		backpanel = new BasinPanel();
+		backpanel.setSideEngine(basinengine);
 		
 		tracepanel = new TracePanel();
 		tracepanel.setEngine(traceengine);
-		tracepanel.setBall(engine.getBall());
+		tracepanel.setBall(ballengine.getBall());
 		
 		controlpanel = new ControlPanel();
-		controlpanel.setBallEngine(engine);
+		controlpanel.setBallEngine(ballengine);
 		controlpanel.setMainpanel(mainpanel);
 		
-		controlpanel.setPattenEngine(sideengine);
+		controlpanel.setPattenEngine(basinengine);
 		controlpanel.setBackpanel(backpanel);
 		
 		controlpanel.setTraceEngine(traceengine);
@@ -61,6 +64,7 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setVisible(true);
+		
 		Insets temp = this.getInsets();
 		mainpanel.setLeftadjust(temp.left);
 		mainpanel.setTopadjust(temp.top);

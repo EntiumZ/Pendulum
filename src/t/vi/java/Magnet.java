@@ -2,8 +2,9 @@ package t.vi.java;
 
 /**
  * 
- * @author Lihua Zhao
+ * @author EntiumZ
  * Magnet class in the system
+ * 
  */
 
 public class Magnet {

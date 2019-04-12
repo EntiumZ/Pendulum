@@ -1,7 +1,10 @@
 package t.vi.java;
 
 /**
- *@author Lihua Zhao 
+ * 
+ * @author EntiumZ
+ * Main panel to display the movement of pendulum 
+ * 
  */
 
 import java.awt.Color;
@@ -19,7 +22,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();	
 	private Color[] colorset = Toolbox.colorset;
 	private Ball ball = null; 
-	private CalEngine engine = null;
+	private BallEngine engine = null;
 	private Thread t = null;
 	
 	private int leftadjust;
@@ -31,7 +34,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 		this.setVisible(true);
 	}
 	
-	public void setEngine(CalEngine e) {
+	public void setEngine(BallEngine e) {
 		this.engine = e;
 		t = new Thread(engine.getBall());
 	}		
@@ -57,8 +60,7 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		
+	public void mouseClicked(MouseEvent arg0) {		
 		int x = arg0.getX();
 		int y = arg0.getY();
 		engine.refresh();		
@@ -115,16 +117,16 @@ public class MainPanel extends JPanel implements MouseListener, Runnable{
 	}
 	
 	//implementation not need
-		@Override
-		public void mouseEntered(MouseEvent arg0) {}
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
 
-		@Override
-		public void mouseExited(MouseEvent arg0) {}
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
 
-		@Override
-		public void mousePressed(MouseEvent arg0) {}
+	@Override
+	public void mousePressed(MouseEvent arg0) {}
 
-		@Override
-		public void mouseReleased(MouseEvent arg0) {}	 
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}	 
 
 }

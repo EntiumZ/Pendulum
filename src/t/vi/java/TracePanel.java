@@ -1,5 +1,12 @@
 package t.vi.java;
 
+/**
+ * 
+ * @author EntiumZ
+ * Panel to display the trace of single pendulum 
+ * 
+ */
+
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,8 +18,6 @@ public class TracePanel extends JPanel implements MouseListener{
 
 	private int[][] trace = null;
 	private boolean isReady = false;
-	
-
 	private TraceCalEngine engine = null;
 	private Ball ball = null;
 	
@@ -44,7 +49,7 @@ public class TracePanel extends JPanel implements MouseListener{
 			int x = arg0.getX();
 			int y = arg0.getY();
 			engine.refresh();
-			trace = engine.computePath(x, y);
+			trace = engine.m_ComputePath(x, y);
 			isReady = true;
 			repaint();			
 		}		
@@ -74,7 +79,7 @@ public class TracePanel extends JPanel implements MouseListener{
 		this.topadjust = topadjust;
 	}
 	
-	//no implements
+	//implements not needed
 	@Override
 	public void mouseEntered(MouseEvent e) {		
 	}

@@ -2,8 +2,9 @@ package t.vi.java;
 
 /**
  * 
- * @author Lihua Zhao
+ * @author EntiumZ
  * Pendulum object, called as ball
+ * 
  */
 
 public class Ball implements Runnable{
@@ -12,16 +13,15 @@ public class Ball implements Runnable{
 	private int positionY = 0;
 	private double mass = Toolbox.mass_0;
 	private boolean stay = true;
-	private CalEngine engine = null;
-	
-	private int[] newposition = null;
+	private BallEngine engine = null;	
+	private int[] newposition = null;	
 	
 	public Ball(int x, int y) {		
 		this.setPositionX(x);
 		this.setPositionY(y);
 	}
 	
-	public void setEngine(CalEngine e) {
+	public void setEngine(BallEngine e) {
 		this.engine = e;
 	}
 	
@@ -75,11 +75,11 @@ public class Ball implements Runnable{
 			newposition = engine.m_Calculate();			
 			this.positionX = newposition[0];
 			this.positionY = newposition[1];
-			if(engine.isBallStay()) {
+			if(engine.isBallStay()) {			
 				setStay(true);
 			}			
 		}
-		System.out.println("ball thread over");						
+		//System.out.println("ball thread over");						
 	}
 
 }

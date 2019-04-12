@@ -1,9 +1,9 @@
 package t.vi.java;
 
-import java.awt.BorderLayout;
-
 /**
- * @author Lihua Zhao
+ * 
+ * @author EntiumZ
+ * Panel for parameters set and reset program
  * 
  */
 
@@ -11,9 +11,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -38,11 +38,11 @@ public class ControlPanel extends JPanel implements ActionListener{
 	private JButton jbDefault = new JButton("Default Setting");	
 	
 	private MainPanel mainpanel = null;
-	private BackPanel backpanel = null;
+	private BasinPanel basinpanel = null;
 	private TracePanel tracepanel = null;
 	
-	private CalEngine ballEngine = null;
-	private BackgroundCalEngine patternEngine = null;
+	private BallEngine ballEngine = null;
+	private BasinCalEngine basinEngine = null;
 	private TraceCalEngine traceEngine = null; 
 
 	private Ball ball = null;
@@ -51,13 +51,13 @@ public class ControlPanel extends JPanel implements ActionListener{
 		this.panelContentSet();		
 	}
 	
-	public void setBallEngine(CalEngine engine) {
+	public void setBallEngine(BallEngine engine) {
 		this.ballEngine = engine;
 		this.ball = ballEngine.getBall();
 	}
 	
-	public void setPattenEngine(BackgroundCalEngine engine) {
-		patternEngine = engine;
+	public void setPattenEngine(BasinCalEngine engine) {
+		basinEngine = engine;
 	}
 	
 	public void setTraceEngine(TraceCalEngine engine) {
@@ -68,19 +68,18 @@ public class ControlPanel extends JPanel implements ActionListener{
 		mainpanel = p;
 	}
 	
-	public void setBackpanel(BackPanel p) {
-		backpanel = p;
+	public void setBackpanel(BasinPanel p) {
+		basinpanel = p;
 	}
 	
 	public void setTracepanel(TracePanel p) {
 		tracepanel = p;
 	}
+	
 	//Panel contents
-	private void panelContentSet() {
-		
+	private void panelContentSet() {		
 		//whole panel consists 4 sub-panel
-		this.setLayout(new GridLayout(4,1));
-		
+		this.setLayout(new GridLayout(4,1));		
 		for(int i = 0; i < 4; i++) {
 			jpPanels[i] = new JPanel();
 			jpPanels[i].setSize(Toolbox.controlpanelWidth, Toolbox.controlpanelHeight / 4);
@@ -95,8 +94,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 		jlTitle.setText(text);
 		Font font = new Font("Dialog", 1, 50);
 		jlTitle.setFont(font);
-		jlTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
+		jlTitle.setAlignmentX(Component.CENTER_ALIGNMENT);		
 		
 		//sub-panel 1 setup, add labels and set text field
 		jlLabels[0] = new JLabel(slabel[0]);
@@ -146,8 +144,8 @@ public class ControlPanel extends JPanel implements ActionListener{
 				
 				ballEngine.setKg(kg);
 				ballEngine.setKf(kf);				
-				patternEngine.setKg(kg);
-				patternEngine.setKf(kf);				
+				basinEngine.setKg(kg);
+				basinEngine.setKf(kf);				
 				traceEngine.setKg(kg);
 				traceEngine.setKf(kf);
 				
@@ -155,24 +153,24 @@ public class ControlPanel extends JPanel implements ActionListener{
 				mainpanel.repaint();				
 				tracepanel.setReady(false);
 				tracepanel.repaint();				
-				backpanel.setFirstPaint(true);
-				backpanel.repaint();
+				basinpanel.setFirstPaint(true);
+				basinpanel.repaint();
 			}			
 		}else if(ae.getSource() == jbDefault) {
 			setLabelsText();
 			
 			ballEngine.setKg(Toolbox.kg_0);
 			ballEngine.setKf(Toolbox.kf_0);
-			patternEngine.setKg(Toolbox.kg_0);
-			patternEngine.setKf(Toolbox.kf_0);
+			basinEngine.setKg(Toolbox.kg_0);
+			basinEngine.setKf(Toolbox.kf_0);
 			traceEngine.setKg(Toolbox.kg_0);
 			traceEngine.setKf(Toolbox.kf_0);
 			
 			ball.setStay(true);
 			ball.wipeBall();
 			mainpanel.repaint();
-			backpanel.setFirstPaint(true);
-			backpanel.repaint();
+			basinpanel.setFirstPaint(true);
+			basinpanel.repaint();
 			tracepanel.setReady(false);
 			tracepanel.repaint();			
 		}		

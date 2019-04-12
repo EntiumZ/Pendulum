@@ -1,13 +1,15 @@
 package t.vi.java;
 
 /**
- * @author Lihua Zhao
+ * 
+ * @author EntiumZ
  * Calculation engine for pattern of the space as the background
+ * 
  */
 
 import java.util.HashSet;
 
-public class BackgroundCalEngine extends EngineCore{
+public class BasinCalEngine extends EngineCore{
 	
 	private HashSet<Double> closedpoints = null;
 	private int stopcounter = 0;
@@ -18,7 +20,7 @@ public class BackgroundCalEngine extends EngineCore{
 	private double curAx = 0.0, curAy = 0.0;
 	private double nexAx = 0.0, nexAy = 0.0;	
 	
-	public BackgroundCalEngine() {
+	public BasinCalEngine() {
 		setMagList(new MagnetsCollection().getMagList());		
 		setFixedPoints();
 		closedpoints = new HashSet<>();
@@ -34,7 +36,7 @@ public class BackgroundCalEngine extends EngineCore{
 		stopcounter = 0;
 	}	
 	
-	public int computePath(int x, int y) {
+	public int m_ComputePaths(int x, int y) {
 		
 		double[] magforce = new double[2];
 		double[] gforce = new double[2];
@@ -59,8 +61,8 @@ public class BackgroundCalEngine extends EngineCore{
 	 		curAx = magforce[0] + gforce[0] + friction[0];
 			curAy = magforce[1] + gforce[1] + friction[1];			
 
-	 		x = x + (int)(curVx + (4 * curAx - preAx) / 6);
-			y = y + (int)(curVy + (4 * curAy - preAy) / 6);
+	 		x += (int)(curVx + (4 * curAx - preAx) / 6);
+			y += (int)(curVy + (4 * curAy - preAy) / 6);
 
 	 		getMagforce(magforce, x, y);
 			getGforce(gforce, x, y);
@@ -68,13 +70,11 @@ public class BackgroundCalEngine extends EngineCore{
 	 		nexAx = magforce[0] + gforce[0] + friction[0];
 			nexAy = magforce[1] + gforce[1] + friction[1];
 
-			curVx = curVx + (2 * nexAx + 5 * curAx - preAx) / 6;
-			curVy = curVy + (2 * nexAy + 5 * curAy - preAy) / 6;			
+			curVx += (2 * nexAx + 5 * curAx - preAx) / 6;
+			curVy += (2 * nexAy + 5 * curAy - preAy) / 6;			
 			
 	 		preAx = curAx;
-			preAy = curAy;	
-			
-			
+			preAy = curAy;			
 			
 			intercounter++;
 			if(intercounter > 300) {
