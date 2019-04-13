@@ -48,10 +48,12 @@ public class TracePanel extends JPanel implements MouseListener{
 		if(ball.isStay()) {
 			int x = arg0.getX();
 			int y = arg0.getY();
-			engine.refresh();
-			trace = engine.m_ComputePath(x, y);
-			isReady = true;
-			repaint();			
+			if(x < 800 && y < 800) {
+				engine.refresh();
+				trace = engine.m_ComputePath(x, y);
+				isReady = true;
+				repaint();				
+			}						
 		}		
 	}
 	
