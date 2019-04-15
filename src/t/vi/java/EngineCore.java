@@ -83,7 +83,7 @@ public class EngineCore {
 		for(int i = 0; i < magList.size(); i++) {
 			Vect vec = new Vect(px, py, magList.get(i).getPositionX(), magList.get(i).getPositionY());
 			double norm = vec.getNorm();
-			double temp = Math.sqrt(norm * norm + 40 * 40);
+			double temp = Math.sqrt(norm * norm + Toolbox.distance * Toolbox.distance);
 			double x = (double)vec.getpX();
 			double y = (double)vec.getpY();			
 			result[0] += magList.get(i).getKm() * 10000.0 * x / (temp * temp * temp);
