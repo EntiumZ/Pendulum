@@ -11,7 +11,7 @@ public class App {
 	
 	public static void main(String[] args) {
 		
-		new MainFrame("Pendulum App"); 
+		new MainFrame("Experimental System"); 
 	}
 
 }
