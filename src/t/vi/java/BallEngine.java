@@ -31,6 +31,7 @@ public class BallEngine extends EngineCore{
 		setFixedPoints();						
 	}
 	
+	@Override
 	public Vector<Magnet> getMagList() {
 		return super.getMagList();
 	}
