@@ -139,8 +139,11 @@ public class ControlPanel extends JPanel implements ActionListener{
 			tracepanel.repaint();
 		}else if(ae.getSource() == jbOk && ball != null) {
 			if(ball.isStay() == true) {				
-				double kg = Double.valueOf(jtFields[1].getText());
-				double kf = Double.valueOf(jtFields[2].getText());
+				double kg = Math.abs(Double.valueOf(jtFields[1].getText()));
+				double kf = Math.abs(Double.valueOf(jtFields[2].getText()));
+				
+				kg = (kg == 0 || kg > 10) ? Toolbox.kg_0 : kg;
+				kf = (kf == 0 || kf > 1) ? Toolbox.kf_0 : kf;
 				
 				ballEngine.setKg(kg);
 				ballEngine.setKf(kf);				
